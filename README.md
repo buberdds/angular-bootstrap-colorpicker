@@ -1,0 +1,2 @@
+angular-bootstrap-colorpicker
+=============================
