@@ -1,7 +1,8 @@
 angular-bootstrap-colorpicker
 =============================
 
-Angularjs directive for <a href="http://www.eyecon.ro/bootstrap-colorpicker/" target="_blank">Colorpicker for Bootstrap</a>.
+Angularjs directive for <a href="http://www.eyecon.ro/bootstrap-colorpicker/" target="_blank">Colorpicker for Bootstrap</a>.<br />
+Go to <a href="http://web.hostdmk.net/github/colorpicker/" target="_blank">demo page</a>
 
 Installation
 ===============================
