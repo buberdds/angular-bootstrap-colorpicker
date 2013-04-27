@@ -13,13 +13,20 @@ Examples (ng-model is optional):
 ===============================
 
 Hex format
+```html
 <input colorpicker class="span2" value="" type="text" ng-model="your_model" >
-or 
+```
+or
+```html
 <input colorpicker="hex" class="span2" value="" type="text" ng-model="your_model" >
+```
 
 RGB format
+```html
 <input colorpicker="rgb" class="span2" value="" ng-model="your_model" type="text" />
+```
 
 RBGA format
+```html
 <input colorpicker="rgba" class="span2" value="" ng-model="your_model" type="text" />
-
+```
