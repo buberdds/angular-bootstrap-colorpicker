@@ -1,14 +1,14 @@
 angular-bootstrap-colorpicker
 =============================
 
-Angularjs directive for <a href="http://www.eyecon.ro/bootstrap-colorpicker/" target="_blank">Colorpicker for Bootstrap</a>.<br />
+Angularjs directive for <a href="http://www.eyecon.ro/bootstrap-colorpicker/" target="_blank">bootstrap-colorpicker</a> library.<br />
 Go to <a href="http://web.hostdmk.net/github/colorpicker/" target="_blank">demo page</a>
 
 Installation
 ===============================
-Copy css/colorpicker.css, img/*.png and, lib/bootstrap-colorpicker.js, js/bootstrap-colorpicker-moduke.js.
+Copy css/colorpicker.css, img/*.png and, lib/bootstrap-colorpicker.js, js/bootstrap-colorpicker-module.js.
 Add a dependency to your app, for instance:
-angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'myApp.controllers', 'colorpicker.module']).
+angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'myApp.controllers', 'colorpicker.module'])
 
 Examples (ng-model is optional):
 ===============================
