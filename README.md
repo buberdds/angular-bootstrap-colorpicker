@@ -36,3 +36,8 @@ As component
 ```html
 <colorpicker input-name="foo" input-class="span2" color-format="hex" ng-model="componentPicker" />
 ```
+
+As non input element
+```html
+<div colorpicker class="span2" data-color="initial_colorcode" ng-model="your_model"></div>
+```
