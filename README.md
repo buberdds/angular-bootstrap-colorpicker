@@ -2,7 +2,7 @@ angular-bootstrap-colorpicker
 =============================
 
 Angularjs directive for <a href="http://www.eyecon.ro/bootstrap-colorpicker/" target="_blank">bootstrap-colorpicker</a> library.<br />
-Go to <a href="http://web.hostdmk.net/github/colorpicker/" target="_blank">demo page</a>
+<a href="http://web.hostdmk.net/github/colorpicker/" target="_blank">Demo page</a>
 
 Installation
 ===============================
@@ -15,11 +15,11 @@ Examples (ng-model is optional):
 
 Hex format
 ```html
-<input colorpicker class="span2" value="" type="text" ng-model="your_model" >
+<input colorpicker class="span2" value="" type="text" ng-model="your_model" />
 ```
 or
 ```html
-<input colorpicker="hex" class="span2" value="" type="text" ng-model="your_model" >
+<input colorpicker="hex" class="span2" value="" type="text" ng-model="your_model" />
 ```
 
 RGB format
