@@ -34,7 +34,7 @@ RBGA format
 
 As component
 ```html
-<colorpicker input-name="foo" input-class="span2" color-format="hex" ng-model="componentPicker" />
+<colorpicker input-name="foo" input-class="span2" color-format="hex" ng-model="componentPicker"></colorpicker>
 ```
 
 As non input element
