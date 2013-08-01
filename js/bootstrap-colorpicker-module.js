@@ -39,7 +39,7 @@ angular.module('colorpicker.module', [])
         });
         
         element.colorpicker().on('hide', function(event){
-  		    scope.$apply(attrs.onHide);
+          scope.$apply(attrs.onHide);
         })
 
         ngModel.$render = function() {
