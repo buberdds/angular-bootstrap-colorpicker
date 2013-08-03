@@ -6,7 +6,6 @@ describe('colorpicker module', function () {
 
   describe('helpers', function () {
     var helper;
-    var element, scope;
 
     beforeEach(inject(function (_helper_) {
       helper = _helper_;
@@ -31,12 +30,13 @@ describe('colorpicker module', function () {
     });
 
     it('should update attributes', function () {
-
-      var mockPluginApi = {
-        color: {
-          setColor: jasmine.createSpy()
-        }
-      };
+      var
+        element,
+        mockPluginApi = {
+          color: {
+            setColor: jasmine.createSpy()
+          }
+        };
 
       element = angular.element('<input type="text" value="" />');
       element.data('colorpicker', mockPluginApi);
