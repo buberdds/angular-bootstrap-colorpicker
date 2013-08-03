@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorpicker.module', [])
-  .factory('colorpicker.helpers', function () {
+  .factory('helper', function () {
     return {
       prepareValues: function(format) {
         var thisFormat = 'hex';
@@ -22,7 +22,7 @@ angular.module('colorpicker.module', [])
       }
     }
   })
-  .directive('colorpicker', ['colorpicker.helpers', function(helper) {
+  .directive('colorpicker', ['helper', function(helper) {
     return {
       require: '?ngModel',
       restrict: 'A',
@@ -52,7 +52,7 @@ angular.module('colorpicker.module', [])
       }
     };
   }])
-  .directive('colorpicker', ['colorpicker.helpers', function(helper) {
+  .directive('colorpicker', ['helper', function(helper) {
     return {
       require: '?ngModel',
       restrict: 'E',
