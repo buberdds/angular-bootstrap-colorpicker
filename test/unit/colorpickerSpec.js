@@ -43,11 +43,11 @@ describe('colorpicker module', function () {
 
       helper.updateView(element);
       expect(element.val()).toEqual('');
-      expect(element.data('colorpicker').color.setColor).toHaveBeenCalled();
+      expect(element.data('colorpicker').color.setColor).toHaveBeenCalledWith('');
 
       helper.updateView(element, '#ff0000');
       expect(element.val()).toEqual('#ff0000');
-      expect(element.data('colorpicker').color.setColor.callCount).toEqual(2);
+      expect(element.data('colorpicker').color.setColor).toHaveBeenCalledWith('#ff0000');
     });
   });
 });
