@@ -24,6 +24,10 @@ describe('colorpicker module', function () {
         name: 'rgb',
         transform: 'toRGB'
       });
+      expect(helper.prepareValues('rgba')).toEqual({
+        name: 'rgba',
+        transform: 'toRGB'
+      });
     });
 
     it('should update attributes', function () {
