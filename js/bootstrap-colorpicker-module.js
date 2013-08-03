@@ -38,9 +38,13 @@ angular.module('colorpicker.module', [])
           scope.$apply(ngModel.$setViewValue(element.data('colorpicker').format(event.color[thisFormat.transform]())));
         });
         
-        element.colorpicker().on('hide', function(event){
+        element.colorpicker().on('hide', function(){
           scope.$apply(attrs.onHide);
-        })
+        });
+
+        element.colorpicker().on('show', function(){
+          scope.$apply(attrs.onShow);
+        });
 
         ngModel.$render = function() {
           helper.updateView(element, ngModel.$viewValue) ;
