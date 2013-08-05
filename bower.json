@@ -1,10 +1,12 @@
 {
   "name": "angular-bootstrap-colorpicker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "js/bootstrap-colorpicker-module.js",
   "ignore": [
-    "**/.*",
     "node_modules",
-    "components"
+    "components",
+    "bower_components",
+    "test",
+    "tests"
   ]
 }
