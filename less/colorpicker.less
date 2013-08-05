@@ -3,7 +3,7 @@
 .colorpicker-saturation {
   width: 100px;
   height: 100px;
-  background-image: url('@{ColorPickerImagePath}/saturation.png');
+  background-image: data-uri('@{ColorPickerImagePath}/saturation.png');
   cursor: crosshair;
   float: left;
   i {
@@ -48,12 +48,16 @@
 }
 
 .colorpicker-hue {
-  background-image: url('@{ColorPickerImagePath}/hue.png');
+  background-image: data-uri('@{ColorPickerImagePath}/hue.png');
 }
 
 .colorpicker-alpha {
-  background-image: url('@{ColorPickerImagePath}/alpha.png');
   display: none;
+}
+
+.colorpicker-alpha,
+.colorpicker-color {
+  background-image: data-uri('@{ColorPickerImagePath}/alpha.png');
 }
 
 .colorpicker {
@@ -101,7 +105,7 @@
   height: 10px;
   margin-top: 5px;
   clear: both;
-  background: transparent url('@{ColorPickerImagePath}/alpha.png') 0 100%;
+  background-position: 0 100%;
   div {
     height: 10px;
   }
