@@ -49,5 +49,26 @@ describe('colorpicker module', function () {
       expect(element.val()).toEqual('#ff0000');
       expect(element.data('colorpicker').color.setColor).toHaveBeenCalledWith('#ff0000');
     });
+
+  });
+
+  describe('directive', function () {
+    var $compile, $rootScope;
+    beforeEach(inject(
+      ['$compile','$rootScope', function($c, $r) {
+        $compile = $c;
+        $rootScope = $r;
+      }]
+    ));
+
+    it('should clean up element from dom', function () {
+      var scope = $rootScope.$new();
+      var element = $compile('<input type="text" value="" data-colorpicker />')(scope);
+
+      expect($(document).find('.colorpicker').length).toBe(1);
+      scope.$destroy();
+      expect($(document).find('.colorpicker').length).toBe(0);
+    });
+
   });
 });
