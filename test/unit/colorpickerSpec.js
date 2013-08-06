@@ -66,7 +66,7 @@ describe('colorpicker module', function () {
       var element = $compile('<input type="text" value="" data-colorpicker />')(scope);
 
       expect($(document).find('.colorpicker').length).toBe(1);
-      scope.$destroy();
+      element.remove();
       expect($(document).find('.colorpicker').length).toBe(0);
     });
 

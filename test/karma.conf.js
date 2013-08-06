@@ -1,7 +1,7 @@
 files = [
   JASMINE,
   JASMINE_ADAPTER,
-  'http://code.jquery.com/jquery-1.10.1.min.js',
+  'libs/jquery-1.10.1.min.js',
   'libs/angular.min.js',
   'libs/angular-mocks.js',
   '../lib/bootstrap-colorpicker.js',
