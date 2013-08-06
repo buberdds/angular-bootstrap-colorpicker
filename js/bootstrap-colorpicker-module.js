@@ -31,6 +31,11 @@ angular.module('colorpicker.module', [])
         var thisFormat = helper.prepareValues(attrs.colorpicker);
 
         element.colorpicker({format: thisFormat.name});
+        // clean up added elements on scope destruction
+        scope.$on('$destroy', function(){
+          element.data('colorpicker').picker.remove();
+        });
+
         if(!ngModel) return;
 
         element.colorpicker().on('changeColor', function(event) {
