@@ -69,7 +69,7 @@ angular.module('colorpicker.module', [])
         inputClass: '@inputClass',
         colorFormat: '@colorFormat'
       },
-      template: '<div class="input-append color" data-color="rgb(0, 0, 0)" data-color-format="">' +
+      template: '<div class="input-append color" data-color=“{{componentPicker}}" data-color-format="">' +
         '<input type="text" class="{{ inputClass }}" name="{{ inputName }}" ng-model="componentPicker" value="" />' +
         '<span class="add-on"><i style="background-color: {{componentPicker}}"></i></span>' +
         '</div>',
