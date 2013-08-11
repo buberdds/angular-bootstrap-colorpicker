@@ -53,21 +53,23 @@ describe('colorpicker module', function () {
   });
 
   describe('directive', function () {
-    var $compile, $rootScope;
-    beforeEach(inject(
-      ['$compile','$rootScope', function($c, $r) {
-        $compile = $c;
-        $rootScope = $r;
-      }]
-    ));
+    var element, scope;
+
+    beforeEach(inject(function($rootScope, $compile) {
+      scope = $rootScope;
+      element = $compile('<input type="text" value="" data-colorpicker />')(scope);
+      scope.$digest();
+    }));
 
     it('should clean up element from dom', function () {
-      var scope = $rootScope.$new();
-      var element = $compile('<input type="text" value="" data-colorpicker />')(scope);
-
       expect($(document).find('.colorpicker').length).toBe(1);
       element.remove();
       expect($(document).find('.colorpicker').length).toBe(0);
+    });
+
+    it('should change visibility of the picker element', function() {
+      element.click();
+      expect($(document).find('.colorpicker').css('display')).toEqual('block');
     });
 
   });
