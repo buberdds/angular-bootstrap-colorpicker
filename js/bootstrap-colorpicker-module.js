@@ -18,7 +18,9 @@ angular.module('colorpicker.module', [])
           value = '';
         }
         element.val(value);
-        element.data('colorpicker').color.setColor(value);
+        if(element.data('colorpicker')) {
+          element.data('colorpicker').color.setColor(value);
+        }
       }
     }
   })
