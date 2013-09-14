@@ -1,16 +1,19 @@
-angular-bootstrap-colorpicker
+angular-bootstrap-colorpicker v2
 =============================
 
-Angularjs directive for <a href="http://www.eyecon.ro/bootstrap-colorpicker/" target="_blank">bootstrap-colorpicker</a> library.<br />
-<a href="http://web.hostdmk.net/github/colorpicker/" target="_blank">Demo page</a>
+This version contains a native AngularJS directive based on bootstrap-colorpicker jQuery library.<br />
+No dependency on jQuery or jQuery plugin is required.<br />
+If you need a functionality from the original plugin switch to other branch in this repository.
+
+<a href="http://web.hostdmk.net/github/colorpicker_v2/" target="_blank">Demo page</a>
 
 Installation
 ===============================
-Copy css/colorpicker.css, img/*.png and, lib/bootstrap-colorpicker.js, js/bootstrap-colorpicker-module.js.
+Copy css/colorpicker.css and js/bootstrap-colorpicker-module.js.
 Add a dependency to your app, for instance:
 angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'myApp.controllers', 'colorpicker.module'])
 
-Examples (ng-model is optional):
+Examples (model must be an object):
 ===============================
 
 Hex format
@@ -30,14 +33,4 @@ RGB format
 RBGA format
 ```html
 <input colorpicker="rgba" class="span2" value="" type="text" ng-model="your_model" />
-```
-
-As component
-```html
-<colorpicker input-name="foo" input-class="span2" color-format="hex" ng-model="componentPicker"></colorpicker>
-```
-
-As non input element
-```html
-<div colorpicker class="span2" data-color="initial_colorcode" ng-model="your_model"></div>
 ```
