@@ -18,19 +18,24 @@ Examples (model must be an object):
 
 Hex format
 ```html
-<input colorpicker class="span2" value="" type="text" ng-model="your_model" />
+<input colorpicker class="span2" type="text" ng-model="your_model" />
 ```
 or
 ```html
-<input colorpicker="hex" class="span2" value="" type="text" ng-model="your_model" />
+<input colorpicker="hex" class="span2" type="text" ng-model="your_model" />
 ```
 
 RGB format
 ```html
-<input colorpicker="rgb" class="span2" value="" type="text" ng-model="your_model" />
+<input colorpicker="rgb" class="span2" type="text" ng-model="your_model" />
 ```
 
 RBGA format
 ```html
-<input colorpicker="rgba" class="span2" value="" type="text" ng-model="your_model" />
+<input colorpicker="rgba" class="span2" type="text" ng-model="your_model" />
+```
+
+As non input element
+```html
+<div colorpicker class="span2" ng-model="your_model"></div>
 ```
