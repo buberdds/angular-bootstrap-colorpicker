@@ -242,17 +242,17 @@ angular.module('colorpicker.module', [])
 
       toHSL: function (h, s, b, a) {
         if (!h) {
-          h = value.h;
-          s = value.s;
-          b = value.b;
+          h = this.value.h;
+          s = this.value.s;
+          b = this.value.b;
         }
         var H = h,
           L = (2 - s) * b,
           S = s * b;
         if (L > 0 && L <= 1) {
-          S /= L;
+          S = S / L;
         } else {
-          S /= 2 - L;
+          S = S / 2 - L;
         }
         L /= 2;
         if (S > 1) {
@@ -262,7 +262,7 @@ angular.module('colorpicker.module', [])
           h: H,
           s: S,
           l: L,
-          a: a || value.a
+          a: a || this.value.a
         };
       }
     }
