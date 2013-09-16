@@ -103,14 +103,6 @@ angular.module('colorpicker.module', [])
         var rgb = this.toRGB();
         return 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',' + rgb.a + ')';
       },
-      'hsl': function () {
-        var hsl = this.toHSL();
-        return 'hsl(' + Math.round(hsl.h * 360) + ',' + Math.round(hsl.s * 100) + '%,' + Math.round(hsl.l * 100) + '%)';
-      },
-      'hsla': function () {
-        var hsl = this.toHSL();
-        return 'hsla(' + Math.round(hsl.h * 360) + ',' + Math.round(hsl.s * 100) + '%,' + Math.round(hsl.l * 100) + '%,' + hsl.a + ')';
-      },
       'hex': function () {
         return  this.toHex();
       },
@@ -150,29 +142,6 @@ angular.module('colorpicker.module', [])
           return p;
       },
 
-      HSLtoRGB: function (h, s, l, a) {
-        if (s < 0) {
-          s = 0;
-        }
-        var q;
-        if (l <= 0.5) {
-          q = l * (1 + s);
-        } else {
-          q = l + s - (l * s);
-        }
-
-        var p = 2 * l - q;
-
-        var tr = h + (1 / 3);
-        var tg = h;
-        var tb = h - (1 / 3);
-
-        var r = Math.round(this.HueToRGB(p, q, tr) * 255);
-        var g = Math.round(this.HueToRGB(p, q, tg) * 255);
-        var b = Math.round(this.HueToRGB(p, q, tb) * 255);
-        return [r, g, b, a || 1];
-      },
-
       //parse a string to HSB
       setColor: function (val) {
         val = val.toLowerCase();
@@ -182,11 +151,7 @@ angular.module('colorpicker.module', [])
             values = match && parser.parse(match),
             space = parser.space || 'rgba';
           if (values) {
-            if (space === 'hsla') {
-              this.value = this.RGBtoHSB.apply(null, this.HSLtoRGB.apply(null, values));
-            } else {
-              this.value = this.RGBtoHSB.apply(null, values);
-            }
+            this.value = this.RGBtoHSB.apply(null, values);
             return false;
           }
         }
@@ -238,32 +203,6 @@ angular.module('colorpicker.module', [])
       toHex: function (h, s, b, a) {
         var rgb = this.toRGB(h, s, b, a);
         return '#' + ((1 << 24) | (parseInt(rgb.r) << 16) | (parseInt(rgb.g) << 8) | parseInt(rgb.b)).toString(16).substr(1);
-      },
-
-      toHSL: function (h, s, b, a) {
-        if (!h) {
-          h = this.value.h;
-          s = this.value.s;
-          b = this.value.b;
-        }
-        var H = h,
-          L = (2 - s) * b,
-          S = s * b;
-        if (L > 0 && L <= 1) {
-          S = S / L;
-        } else {
-          S = S / 2 - L;
-        }
-        L /= 2;
-        if (S > 1) {
-          S = 1;
-        }
-        return {
-          h: H,
-          s: S,
-          l: L,
-          a: a || this.value.a
-        };
       }
     }
   }])
