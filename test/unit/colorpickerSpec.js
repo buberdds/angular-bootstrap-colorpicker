@@ -71,5 +71,15 @@ describe('colorpicker module', function () {
       expect(Color.value.a).toEqual(0.5);
     });
 
+    it('should convert value to hex', function () {
+      Color.setColor('rgb(102, 204, 68)');
+      expect(Color.toHex()).toEqual('#66cc44');
+    });
+
+    it('should convert value to rgb', function () {
+      Color.setColor('#66CC44)');
+      expect(Color.toRGB()).toEqual({r:102, g:204, b:68, a:1});
+    });
+
   });
 });
