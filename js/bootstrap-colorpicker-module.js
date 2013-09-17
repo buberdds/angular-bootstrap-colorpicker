@@ -225,6 +225,7 @@ angular.module('colorpicker.module', [])
           pickerColorPreview,
           pickerColorAlpha,
           pickerColorBase,
+          pickerColorPointers,
           pointer = null,
           slider = null;
 
@@ -248,6 +249,9 @@ angular.module('colorpicker.module', [])
           ngModel.$render = function () {
             elem.val(ngModel.$viewValue);
           };
+          $scope.$watch(attrs.ngModel, function() {
+            $scope.update();
+          });
         }
 
         elem.bind('$destroy', function() {
@@ -263,6 +267,7 @@ angular.module('colorpicker.module', [])
 
         pickerColorBase = colorpickerTemplate.find('div')[0].style;
         pickerColorPreview = colorpickerTemplate.find('div')[4].style;
+        pickerColorPointers = colorpickerTemplate.find('i');
 
         var slidersUpdate = function (event) {
           event.stopPropagation();
@@ -352,13 +357,12 @@ angular.module('colorpicker.module', [])
 
         $scope.update = function () {
           pickerColor.setColor(elem.val());
-          colorpickerTemplate.find('i')
-            .eq(0).css({
-              left: pickerColor.value.s * 100,
-              top: 100 - pickerColor.value.b * 100
-            })
-            .eq(1).css('top', 100 * (1 - pickerColor.value.h))
-            .eq(2).css('top', 100 * (1 - pickerColor.value.a));
+          pickerColorPointers.eq(0).css({
+            left: pickerColor.value.s * 100 + 'px',
+            top: 100 - pickerColor.value.b * 100 + 'px'
+          });
+          pickerColorPointers.eq(1).css('top', 100 * (1 - pickerColor.value.h) + 'px');
+          pickerColorPointers.eq(2).css('top', 100 * (1 - pickerColor.value.a) + 'px');
           $scope.previewColor();
         };
 
