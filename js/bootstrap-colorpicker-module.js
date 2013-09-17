@@ -208,7 +208,7 @@ angular.module('colorpicker.module', [])
   }])
   .directive('colorpicker', ['$document', '$compile', 'Color', 'helper', function ($document, $compile, Color, helper) {
     return {
-      require: 'ngModel',
+      require: '?ngModel',
       scope: true,
       restrict: 'A',
       link: function ($scope, elem, attrs, ngModel) {
@@ -244,16 +244,20 @@ angular.module('colorpicker.module', [])
 
         angular.element(document.body).append(colorpickerTemplate);
 
-        ngModel.$render = function () {
-          elem.val(ngModel.$viewValue);
-        };
+        if(ngModel) {
+          ngModel.$render = function () {
+            elem.val(ngModel.$viewValue);
+          };
+        }
 
         elem.bind('$destroy', function() {
           colorpickerTemplate.remove();
         });
 
         $scope.$on('changeColor', function (event, newColor) {
-          $scope.$apply(ngModel.$setViewValue(newColor));
+          if(ngModel) {
+            $scope.$apply(ngModel.$setViewValue(newColor));
+          }
           elem.val(newColor);
         });
 
