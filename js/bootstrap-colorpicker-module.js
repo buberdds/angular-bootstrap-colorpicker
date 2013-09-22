@@ -70,18 +70,6 @@ angular.module('colorpicker.module', [])
               parseInt(execResult[3] + execResult[3], 16)
             ];
           }
-        },
-        {
-          re: /hsla?\(\s*(\d+(?:\.\d+)?)\s*,\s*(\d+(?:\.\d+)?)\%\s*,\s*(\d+(?:\.\d+)?)\%\s*(?:,\s*(\d+(?:\.\d+)?)\s*)?\)/,
-          space: 'hsla',
-          parse: function (execResult) {
-            return [
-              execResult[1] / 360,
-              execResult[2] / 100,
-              execResult[3] / 100,
-              execResult[4]
-            ];
-          }
         }
       ]
     }
@@ -209,7 +197,6 @@ angular.module('colorpicker.module', [])
   .directive('colorpicker', ['$document', '$compile', 'Color', 'helper', function ($document, $compile, Color, helper) {
     return {
       require: '?ngModel',
-      scope: true,
       restrict: 'A',
       link: function ($scope, elem, attrs, ngModel) {
 
@@ -234,7 +221,7 @@ angular.module('colorpicker.module', [])
         $compile(colorpickerTemplate)($scope);
 
         pickerColorAlpha = {
-          enabled: thisFormat === 'rgba' || thisFormat === 'hsla',
+          enabled: thisFormat === 'rgba',
           css: null
         };
 
@@ -250,7 +237,7 @@ angular.module('colorpicker.module', [])
             elem.val(ngModel.$viewValue);
           };
           $scope.$watch(attrs.ngModel, function() {
-            $scope.update();
+            update();
           });
         }
 
@@ -258,16 +245,21 @@ angular.module('colorpicker.module', [])
           colorpickerTemplate.remove();
         });
 
-        $scope.$on('changeColor', function (event, newColor) {
-          if(ngModel) {
-            $scope.$apply(ngModel.$setViewValue(newColor));
-          }
-          elem.val(newColor);
-        });
-
         pickerColorBase = colorpickerTemplate.find('div')[0].style;
         pickerColorPreview = colorpickerTemplate.find('div')[4].style;
         pickerColorPointers = colorpickerTemplate.find('i');
+
+        var previewColor = function () {
+          try {
+            pickerColorPreview.backgroundColor = pickerColor[thisFormat]();
+          } catch (e) {
+            pickerColorPreview.backgroundColor = pickerColor.toHex();
+          }
+          pickerColorBase.backgroundColor = pickerColor.toHex(pickerColor.value.h, 1, 1, 1);
+          if (pickerColorAlpha.enabled === true) {
+            pickerColorAlpha.css.backgroundColor = pickerColor.toHex();
+          }
+        };
 
         var slidersUpdate = function (event) {
           event.stopPropagation();
@@ -333,8 +325,12 @@ angular.module('colorpicker.module', [])
           if (slider.callTop) {
             pickerColor[slider.callTop].call(pickerColor, top / 100);
           }
-          $scope.previewColor();
-          $scope.$emit('changeColor', pickerColor[thisFormat]());
+          previewColor();
+          var newColor = pickerColor[thisFormat]();
+          if(ngModel) {
+            $scope.$apply(ngModel.$setViewValue(newColor));
+          }
+          elem.val(newColor);
           return false;
         };
 
@@ -343,19 +339,7 @@ angular.module('colorpicker.module', [])
           $document.unbind('mouseup', mouseup);
         };
 
-        $scope.previewColor = function () {
-          try {
-            pickerColorPreview.backgroundColor = pickerColor[thisFormat]();
-          } catch (e) {
-            pickerColorPreview.backgroundColor = pickerColor.toHex();
-          }
-          pickerColorBase.backgroundColor = pickerColor.toHex(pickerColor.value.h, 1, 1, 1);
-          if (pickerColorAlpha.enabled === true) {
-            pickerColorAlpha.css.backgroundColor = pickerColor.toHex();
-          }
-        };
-
-        $scope.update = function () {
+        var update = function () {
           pickerColor.setColor(elem.val());
           pickerColorPointers.eq(0).css({
             left: pickerColor.value.s * 100 + 'px',
@@ -363,24 +347,17 @@ angular.module('colorpicker.module', [])
           });
           pickerColorPointers.eq(1).css('top', 100 * (1 - pickerColor.value.h) + 'px');
           pickerColorPointers.eq(2).css('top', 100 * (1 - pickerColor.value.a) + 'px');
-          $scope.previewColor();
-        };
-
-        $scope.place = function () {
-          colorpickerTemplate.css({
-            'top': helper.getOffset(elem[0]).top + elem[0].offsetHeight - document.body.scrollTop + 'px',
-            'left': helper.getOffset(elem[0]).left - document.body.scrollLeft + 'px'
-          });
-        };
-
-        $scope.show = function () {
-          $scope.update();
-          colorpickerTemplate.addClass('colorpicker-visible');
-          $scope.place();
+          previewColor();
         };
 
         elem.bind('click', function () {
-          $scope.show();
+          update();
+          colorpickerTemplate
+            .addClass('colorpicker-visible')
+            .css({
+              'top': helper.getOffset(elem[0]).top + elem[0].offsetHeight - document.body.scrollTop + 'px',
+              'left': helper.getOffset(elem[0]).left - document.body.scrollLeft + 'px'
+            });
         });
 
         colorpickerTemplate.bind('mousedown', function (event) {
