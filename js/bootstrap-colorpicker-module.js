@@ -327,10 +327,10 @@ angular.module('colorpicker.module', [])
           }
           previewColor();
           var newColor = pickerColor[thisFormat]();
+          elem.val(newColor);
           if(ngModel) {
             $scope.$apply(ngModel.$setViewValue(newColor));
           }
-          elem.val(newColor);
           return false;
         };
 
