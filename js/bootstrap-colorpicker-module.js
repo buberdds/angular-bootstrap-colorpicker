@@ -3,6 +3,17 @@
 angular.module('colorpicker.module', [])
   .factory('helper', function () {
     return {
+      closest: function (elem, selector) {
+        var matchesSelector = elem.matches || elem.webkitMatchesSelector || elem.mozMatchesSelector || elem.msMatchesSelector;
+        while (elem) {
+          if (matchesSelector.bind(elem)(selector)) {
+            return elem;
+          } else {
+            elem = elem.parentNode;
+          }
+        }
+        return false;
+      },
       getOffset: function (el) {
         var
           _x = 0,
@@ -264,7 +275,9 @@ angular.module('colorpicker.module', [])
         var slidersUpdate = function (event) {
           event.stopPropagation();
           event.preventDefault();
-          var zone = event.target;
+
+          var zone = helper.closest(event.target, 'div');
+
           if (zone.className === 'colorpicker-saturation') {
             slider = helper.extend({}, {
               maxLeft: 100,
