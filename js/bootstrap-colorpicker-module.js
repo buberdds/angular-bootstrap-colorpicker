@@ -14,18 +14,18 @@ angular.module('colorpicker.module', [])
         }
         return false;
       },
-      getOffset: function (el) {
+      getOffset: function (elem) {
         var
-          _x = 0,
-          _y = 0;
-        while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
-          _x += el.offsetLeft + el.scrollLeft;
-          _y += el.offsetTop + el.scrollTop;
-          el = el.offsetParent;
+          x = 0,
+          y = 0;
+        while (elem && !isNaN(elem.offsetLeft) && !isNaN(elem.offsetTop)) {
+          x += elem.offsetLeft;
+          y += elem.offsetTop;
+          elem = elem.offsetParent;
         }
         return {
-          top: _y,
-          left: _x
+          top: y,
+          left: x
         };
       },
       extend: function () {
@@ -368,8 +368,8 @@ angular.module('colorpicker.module', [])
           colorpickerTemplate
             .addClass('colorpicker-visible')
             .css({
-              'top': helper.getOffset(elem[0]).top + elem[0].offsetHeight - document.body.scrollTop + 'px',
-              'left': helper.getOffset(elem[0]).left - document.body.scrollLeft + 'px'
+              'top': helper.getOffset(elem[0]).top + elem[0].offsetHeight + 'px',
+              'left': helper.getOffset(elem[0]).left + 'px'
             });
         });
 
