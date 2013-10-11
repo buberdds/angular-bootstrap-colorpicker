@@ -216,7 +216,8 @@ angular.module('colorpicker.module', [])
             '<div class="colorpicker-saturation"><i><b></b></i></div>' +
             '<div class="colorpicker-hue"><i></i></div>' +
             '<div class="colorpicker-alpha"><i></i></div>' +
-            '<div class="colorpicker-color"><div /></div>' +
+            '<div class="colorpicker-color"><div></div></div>' +
+            '<button class="close close-colorpicker">&times;</button>' +
             '</div>',
           colorpickerTemplate = angular.element(template),
           pickerColor = Color,
@@ -302,6 +303,7 @@ angular.module('colorpicker.module', [])
               callTop: 'setAlpha'
             });
           } else {
+            slider = null;
             return false;
           }
           slider.knob = zone.children[0].style;
@@ -314,6 +316,9 @@ angular.module('colorpicker.module', [])
         };
 
         var mousemove = function (event) {
+          if (!slider) {
+            return;
+          }
           var left = Math.max(
             0,
             Math.min(
@@ -389,10 +394,18 @@ angular.module('colorpicker.module', [])
           $document.bind('mouseup', mouseup);
         });
 
-        $document.bind('mousedown', function () {
+        var hideColorpickerTemplate = function() {
           if (colorpickerTemplate.hasClass('colorpicker-visible')) {
             colorpickerTemplate.removeClass('colorpicker-visible');
           }
+        };
+
+        colorpickerTemplate.find('button').bind('click', function () {
+          hideColorpickerTemplate();
+        });
+
+        $document.bind('mousedown', function () {
+          hideColorpickerTemplate();
         });
       }
     };
