@@ -40,7 +40,7 @@ As non input element
 <div colorpicker class="span2" ng-model="your_model"></div>
 ```
 
-Position of the colorpicker (top, right, bottom, left)
+Position of the colorpicker (top, right, bottom, left).
 ```html
-<div colorpicker colorpicker-position="right" class="span2" ng-model="your_model"></div>
+<input colorpicker colorpicker-position="right" class="span2" type="text" ng-model="your_model" />
 ```
