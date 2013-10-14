@@ -229,6 +229,8 @@ angular.module('colorpicker.module', [])
           slider = null;
 
         var thisFormat = attrs.colorpicker ? attrs.colorpicker : 'hex';
+        var position = attrs.colorpickerPosition ? attrs.colorpickerPosition : 'bottom';
+
 
         $compile(colorpickerTemplate)($scope);
 
@@ -241,6 +243,8 @@ angular.module('colorpicker.module', [])
           colorpickerTemplate.addClass('alpha');
           pickerColorAlpha.css = colorpickerTemplate.find('div')[2].style;
         }
+
+        colorpickerTemplate.addClass('colorpicker-position-' + position);
 
         angular.element(document.body).append(colorpickerTemplate);
 
@@ -368,14 +372,43 @@ angular.module('colorpicker.module', [])
           previewColor();
         };
 
+        var getColorpickerTemplatePosition = function() {
+          var
+            positionValue,
+            positionOffset = helper.getOffset(elem[0]);
+
+          if (position === 'top') {
+            positionValue =  {
+              'top': positionOffset.top - 146,
+              'left': positionOffset.left
+            }
+          } else if (position === 'right') {
+            positionValue = {
+              'top': positionOffset.top,
+              'left': positionOffset.left + 141
+            }
+          } else if (position === 'bottom') {
+            positionValue = {
+              'top': positionOffset.top + elem[0].offsetHeight,
+              'left': positionOffset.left
+            }
+          } else if (position === 'left') {
+            positionValue = {
+              'top': positionOffset.top,
+              'left': positionOffset.left - 131
+            }
+          }
+          return {
+            'top': positionValue.top + 'px',
+            'left': positionValue.left + 'px'
+          };
+        };
+
         elem.bind('click', function () {
           update();
           colorpickerTemplate
             .addClass('colorpicker-visible')
-            .css({
-              'top': helper.getOffset(elem[0]).top + elem[0].offsetHeight + 'px',
-              'left': helper.getOffset(elem[0]).left + 'px'
-            });
+            .css(getColorpickerTemplatePosition());
         });
 
         colorpickerTemplate.bind('mousedown', function (event) {

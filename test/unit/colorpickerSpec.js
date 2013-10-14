@@ -9,7 +9,7 @@ describe('colorpicker module', function () {
 
     beforeEach(inject(function($rootScope, $compile) {
       scope = $rootScope;
-      element = $compile('<input ng-model="picker.color" type="text" value="" data-colorpicker />')(scope);
+      element = $compile('<input colorpicker ng-model="picker.color" type="text" value="" />')(scope);
       scope.$digest();
     }));
 
@@ -22,6 +22,10 @@ describe('colorpicker module', function () {
     it('should change visibility of the picker element', function() {
       element.click();
       expect($(document).find('.colorpicker').css('display')).toEqual('block');
+    });
+
+    it('should set a default class name', function() {
+      expect($(document).find('.colorpicker').hasClass('colorpicker-position-bottom')).toBeTruthy();
     });
 
   });

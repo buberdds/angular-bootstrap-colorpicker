@@ -39,3 +39,8 @@ As non input element
 ```html
 <div colorpicker class="span2" ng-model="your_model"></div>
 ```
+
+Position of the colorpicker (top, right, bottom, left)
+```html
+<div colorpicker colorpicker-position="right" class="span2" ng-model="your_model"></div>
+```
