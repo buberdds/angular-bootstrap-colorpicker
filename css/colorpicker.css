@@ -147,10 +147,3 @@
 .colorpicker-color div {
   height: 10px;
 }
-.input-append.color .add-on i,
-.input-prepend.color .add-on i {
-  display: block;
-  cursor: pointer;
-  width: 16px;
-  height: 16px;
-}
