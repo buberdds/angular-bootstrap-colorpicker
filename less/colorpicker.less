@@ -1,6 +1,7 @@
 @import "variables.less";
 
-.colorpicker-visible {
+.colorpicker-visible,
+.colorpicker-visible .dropdown-menu {
   display: block !important;
 }
 
@@ -12,8 +13,8 @@
   float: left;
   i {
     display: block;
-    height: 5px;
-    width: 5px;
+    height: 7px;
+    width: 7px;
     border: 1px solid #000;
     border-radius: 5px;
     position: absolute;
@@ -22,8 +23,8 @@
     margin: -4px 0 0 -4px;
     b {
       display: block;
-      height: 5px;
-      width: 5px;
+      height: 7px;
+      width: 7px;
       border: 1px solid #fff;
       border-radius: 5px;
     }
@@ -65,14 +66,12 @@
 }
 
 .colorpicker {
-  *zoom: 1;
   top: 0;
   left: 0;
-  padding: 4px;
-  min-width: 120px;
-  margin-top: 1px;
-  border-radius: 4px;
-  div {
+  position: absolute;
+  z-index: 1000;
+  display: none;
+  li {
     position: relative;
   }
   &.alpha {
@@ -81,80 +80,98 @@
       display: block;
     }
   }
-  &:after,
-  &:before {
-    content: '';
-    display: inline-block;
-    position: absolute;
+  .dropdown-menu {
+    &:after,
+    &:before {
+      content: '';
+      display: inline-block;
+      position: absolute;
+    }
+    &:after {
+      clear: both;
+      border: 6px solid transparent;
+      top: -5px;
+      left: 7px;
+    }
+    &:before {
+      border: 7px solid transparent;
+      top: -6px;
+      left: 6px;
+    }
   }
-  &:after {
-    clear: both;
-    border: 6px solid transparent;
-    top: -6px;
-    left: 7px;
-  }
-  &:before {
-    border: 7px solid transparent;
-    top: -7px;
-    left: 6px;
+  .dropdown-menu {
+    position: static;
+    top: 0;
+    left: 0;
+    min-width: 120px;
+    padding: 4px;
+    margin-top: 0;
   }
 }
 
 .colorpicker-position-top {
-  &:after {
-    border-top: 6px solid #fff;
-    border-bottom: 0;
-    top: auto;
-    bottom: -6px;
-  }
-  &:before {
-    border-top: 7px solid #ccc;
-    border-bottom: 0;
-    top: auto;
-    bottom: -7px;
+  .dropdown-menu {
+    &:after {
+      border-top: 6px solid #fff;
+      border-bottom: 0;
+      top: auto;
+      bottom: -5px;
+    }
+    &:before {
+      border-top: 7px solid #ccc;
+      border-bottom: 0;
+      top: auto;
+      bottom: -6px;
+    }
   }
 }
 
 .colorpicker-position-right {
-  &:after {
-    border-right: 6px solid #fff;
-    border-left: 0;
-    top: 11px;
-    left: -6px;
-  }
-  &:before {
-    border-right: 7px solid #ccc;
-    border-left: 0;
-    top: 10px;
-    left: -7px;
+  .dropdown-menu {
+    &:after {
+      border-right: 6px solid #fff;
+      border-left: 0;
+      top: 11px;
+      left: -5px;
+    }
+    &:before {
+      border-right: 7px solid #ccc;
+      border-left: 0;
+      top: 10px;
+      left: -6px;
+    }
   }
 }
 
 .colorpicker-position-bottom {
-  &:after {
-    border-bottom: 6px solid #fff;
-    border-top: 0;
-  }
-  &:before {
-    border-bottom: 7px solid #ccc;
-    border-top: 0;
+  .dropdown-menu {
+    &:after {
+      border-bottom: 6px solid #fff;
+      border-top: 0;
+    }
+    &:before {
+      border-bottom: 7px solid #ccc;
+      border-top: 0;
+    }
   }
 }
 
 .colorpicker-position-left {
-  &:after {
-    border-left: 6px solid #fff;
-    border-right: 0;
-    top: 11px;
-    left: auto;
-    right: -6px;
-  }
-  &:before {
-    border-left: 7px solid #ccc;
-    border-right: 0;
-    top: 10px;
-    left: auto;
-    right: -7px;
+  .dropdown-menu {
+    &:after {
+      border-left: 6px solid #fff;
+      border-right: 0;
+      top: 11px;
+      left: auto;
+      right: -5px;
+    }
+    &:before {
+      border-left: 7px solid #ccc;
+      border-right: 0;
+      top: 10px;
+      left: auto;
+      right: -6px;
+    }
   }
 }
 

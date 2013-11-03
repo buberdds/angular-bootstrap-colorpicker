@@ -212,12 +212,14 @@ angular.module('colorpicker.module', [])
       link: function ($scope, elem, attrs, ngModel) {
 
         var
-          template = '<div class="colorpicker dropdown-menu">' +
-            '<div class="colorpicker-saturation"><i><b></b></i></div>' +
-            '<div class="colorpicker-hue"><i></i></div>' +
-            '<div class="colorpicker-alpha"><i></i></div>' +
-            '<div class="colorpicker-color"><div></div></div>' +
+          template = '<div class="colorpicker dropdown">' +
+            '<ul class="dropdown-menu">' +
+            '<li class="colorpicker-saturation"><i><b></b></i></li>' +
+            '<li class="colorpicker-hue"><i></i></li>' +
+            '<li class="colorpicker-alpha"><i></i></li>' +
+            '<li class="colorpicker-color"><div></div></li>' +
             '<button class="close close-colorpicker">&times;</button>' +
+            '</ul>' +
             '</div>',
           colorpickerTemplate = angular.element(template),
           pickerColor = Color,
@@ -241,7 +243,7 @@ angular.module('colorpicker.module', [])
 
         if (pickerColorAlpha.enabled === true) {
           colorpickerTemplate.addClass('alpha');
-          pickerColorAlpha.css = colorpickerTemplate.find('div')[2].style;
+          pickerColorAlpha.css = colorpickerTemplate.find('li')[2].style;
         }
 
         colorpickerTemplate.addClass('colorpicker-position-' + position);
@@ -261,8 +263,8 @@ angular.module('colorpicker.module', [])
           colorpickerTemplate.remove();
         });
 
-        pickerColorBase = colorpickerTemplate.find('div')[0].style;
-        pickerColorPreview = colorpickerTemplate.find('div')[4].style;
+        pickerColorBase = colorpickerTemplate.find('li')[0].style;
+        pickerColorPreview = colorpickerTemplate.find('div')[0].style;
         pickerColorPointers = colorpickerTemplate.find('i');
 
         var previewColor = function () {
@@ -281,7 +283,7 @@ angular.module('colorpicker.module', [])
           event.stopPropagation();
           event.preventDefault();
 
-          var zone = helper.closest(event.target, 'div');
+          var zone = helper.closest(event.target, 'li');
 
           if (zone.className === 'colorpicker-saturation') {
             slider = helper.extend({}, {
@@ -379,17 +381,17 @@ angular.module('colorpicker.module', [])
 
           if (position === 'top') {
             positionValue =  {
-              'top': positionOffset.top - 146,
+              'top': positionOffset.top - 147,
               'left': positionOffset.left
             }
           } else if (position === 'right') {
             positionValue = {
               'top': positionOffset.top,
-              'left': positionOffset.left + 141
+              'left': positionOffset.left + 157
             }
           } else if (position === 'bottom') {
             positionValue = {
-              'top': positionOffset.top + elem[0].offsetHeight,
+              'top': positionOffset.top + elem[0].offsetHeight + 2,
               'left': positionOffset.left
             }
           } else if (position === 'left') {
@@ -416,12 +418,12 @@ angular.module('colorpicker.module', [])
           event.preventDefault();
         });
 
-        colorpickerTemplate.find('div').bind('click', function (event) {
+        colorpickerTemplate.find('li').bind('click', function (event) {
           slidersUpdate(event);
           mousemove(event);
         });
 
-        colorpickerTemplate.find('div').bind('mousedown', function (event) {
+        colorpickerTemplate.find('li').bind('mousedown', function (event) {
           slidersUpdate(event);
           $document.bind('mousemove', mousemove);
           $document.bind('mouseup', mouseup);
