@@ -3,9 +3,12 @@ angular-bootstrap-colorpicker
 
 This version contains a native AngularJS directive based on bootstrap-colorpicker jQuery library.<br />
 No dependency on jQuery or jQuery plugin is required.<br />
-If you need a functionality from the original plugin or IE&lt;9 support switch to <a href="https://github.com/buberdds/angular-bootstrap-colorpicker/tree/1.0.0">1.0.0 branch</a> in this repository.
 
-<a href="http://web.hostdmk.net/github/colorpicker_v2/" target="_blank">Demo page</a>
+<a href="http://web.hostdmk.net/github/colorpicker_v3/" target="_blank">Demo page (Bootstrap v3.x.x)</a>
+
+Previous releases:
+  - <a href="https://github.com/buberdds/angular-bootstrap-colorpicker/tree/2.0">branch 2.0 (Bootstrap v2.x.x)</a>
+  - <a href="https://github.com/buberdds/angular-bootstrap-colorpicker/tree/1.0.0">branch 1.0</a> if you need a functionality from the original plugin or IE&lt;9 support
 
 Installation
 ===============================

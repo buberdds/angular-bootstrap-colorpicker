@@ -106,7 +106,7 @@
   bottom: -5px;
 }
 .colorpicker-position-top .dropdown-menu:before {
-  border-top: 7px solid #ccc;
+  border-top: 7px solid rgba(0, 0, 0, 0.2);
   border-bottom: 0;
   top: auto;
   bottom: -6px;
@@ -118,7 +118,7 @@
   left: -5px;
 }
 .colorpicker-position-right .dropdown-menu:before {
-  border-right: 7px solid #ccc;
+  border-right: 7px solid rgba(0, 0, 0, 0.2);
   border-left: 0;
   top: 10px;
   left: -6px;
@@ -128,7 +128,7 @@
   border-top: 0;
 }
 .colorpicker-position-bottom .dropdown-menu:before {
-  border-bottom: 7px solid #ccc;
+  border-bottom: 7px solid rgba(0, 0, 0, 0.2);
   border-top: 0;
 }
 .colorpicker-position-left .dropdown-menu:after {
@@ -139,7 +139,7 @@
   right: -5px;
 }
 .colorpicker-position-left .dropdown-menu:before {
-  border-left: 7px solid #ccc;
+  border-left: 7px solid rgba(0, 0, 0, 0.2);
   border-right: 0;
   top: 10px;
   left: auto;
