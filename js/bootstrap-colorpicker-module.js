@@ -214,7 +214,7 @@ angular.module('colorpicker.module', [])
         var
           template = '<div class="colorpicker dropdown">' +
             '<ul class="dropdown-menu">' +
-            '<li class="colorpicker-saturation"><i><b></b></i></li>' +
+            '<li class="colorpicker-saturation"><i></i></li>' +
             '<li class="colorpicker-hue"><i></i></li>' +
             '<li class="colorpicker-alpha"><i></i></li>' +
             '<li class="colorpicker-color"><div></div></li>' +

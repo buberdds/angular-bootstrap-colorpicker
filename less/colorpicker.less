@@ -1,5 +1,3 @@
-@import "variables.less";
-
 .colorpicker-visible,
 .colorpicker-visible .dropdown-menu {
   display: block !important;
@@ -8,7 +6,7 @@
 .colorpicker-saturation {
   width: 100px;
   height: 100px;
-  background-image: data-uri('@{ColorPickerImagePath}/saturation.png');
+  background-image: data-uri('../img/saturation.png');
   cursor: crosshair;
   float: left;
   i {
@@ -21,7 +19,8 @@
     top: 0;
     left: 0;
     margin: -4px 0 0 -4px;
-    b {
+    &::after {
+      content: '';
       display: block;
       height: 7px;
       width: 7px;
@@ -53,7 +52,7 @@
 }
 
 .colorpicker-hue {
-  background-image: data-uri('@{ColorPickerImagePath}/hue.png');
+  background-image: data-uri('../img/hue.png');
 }
 
 .colorpicker-alpha {
@@ -62,7 +61,7 @@
 
 .colorpicker-alpha,
 .colorpicker-color {
-  background-image: data-uri('@{ColorPickerImagePath}/alpha.png');
+  background-image: data-uri('../img/alpha.png');
 }
 
 .colorpicker {
@@ -81,19 +80,19 @@
     }
   }
   .dropdown-menu {
-    &:after,
-    &:before {
+    &::after,
+    &::before {
       content: '';
       display: inline-block;
       position: absolute;
     }
-    &:after {
+    &::after {
       clear: both;
       border: 6px solid transparent;
       top: -5px;
       left: 7px;
     }
-    &:before {
+    &::before {
       border: 7px solid transparent;
       top: -6px;
       left: 6px;
@@ -111,13 +110,13 @@
 
 .colorpicker-position-top {
   .dropdown-menu {
-    &:after {
+    &::after {
       border-top: 6px solid #fff;
       border-bottom: 0;
       top: auto;
       bottom: -5px;
     }
-    &:before {
+    &::before {
       border-top: 7px solid rgba(0, 0, 0, 0.2);
       border-bottom: 0;
       top: auto;
@@ -128,13 +127,13 @@
 
 .colorpicker-position-right {
   .dropdown-menu {
-    &:after {
+    &::after {
       border-right: 6px solid #fff;
       border-left: 0;
       top: 11px;
       left: -5px;
     }
-    &:before {
+    &::before {
       border-right: 7px solid rgba(0, 0, 0, 0.2);
       border-left: 0;
       top: 10px;
@@ -145,11 +144,11 @@
 
 .colorpicker-position-bottom {
   .dropdown-menu {
-    &:after {
+    &::after {
       border-bottom: 6px solid #fff;
       border-top: 0;
     }
-    &:before {
+    &::before {
       border-bottom: 7px solid rgba(0, 0, 0, 0.2);
       border-top: 0;
     }
@@ -158,7 +157,7 @@
 
 .colorpicker-position-left {
   .dropdown-menu {
-    &:after {
+    &::after {
       border-left: 6px solid #fff;
       border-right: 0;
       top: 11px;
