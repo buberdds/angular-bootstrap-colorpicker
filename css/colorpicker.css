@@ -75,6 +75,9 @@
 .colorpicker.alpha .colorpicker-alpha {
   display: block;
 }
+.colorpicker.colorpicker-fixed-position {
+  position: fixed;
+}
 .colorpicker .dropdown-menu::after,
 .colorpicker .dropdown-menu::before {
   content: '';

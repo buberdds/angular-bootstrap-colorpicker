@@ -47,3 +47,8 @@ Position of the colorpicker (top, right, bottom, left).
 ```html
 <input colorpicker colorpicker-position="right" class="span2" type="text" ng-model="your_model" />
 ```
+
+When the colorpicker is used in a fixed element.
+```html
+<input colorpicker colorpicker-fixed-position="true" class="span2" type="text" ng-model="your_model" />
+```

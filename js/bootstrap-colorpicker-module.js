@@ -232,7 +232,7 @@ angular.module('colorpicker.module', [])
 
         var thisFormat = attrs.colorpicker ? attrs.colorpicker : 'hex';
         var position = attrs.colorpickerPosition ? attrs.colorpickerPosition : 'bottom';
-
+        var fixedPosition = attrs.colorpickerFixedPosition ? attrs.colorpickerFixedPosition : false;
 
         $compile(colorpickerTemplate)($scope);
 
@@ -244,6 +244,10 @@ angular.module('colorpicker.module', [])
         if (pickerColorAlpha.enabled === true) {
           colorpickerTemplate.addClass('alpha');
           pickerColorAlpha.css = colorpickerTemplate.find('li')[2].style;
+        }
+
+        if (fixedPosition) {
+          colorpickerTemplate.addClass('colorpicker-fixed-position');
         }
 
         colorpickerTemplate.addClass('colorpicker-position-' + position);
@@ -315,6 +319,10 @@ angular.module('colorpicker.module', [])
           slider.knob = zone.children[0].style;
           slider.left = event.pageX - helper.getOffset(zone).left;
           slider.top = event.pageY - helper.getOffset(zone).top;
+          if (fixedPosition) {
+            slider.left -= window.pageXOffset;
+            slider.top -= window.pageYOffset;
+          }
           pointer = {
             left: event.pageX,
             top: event.pageY
