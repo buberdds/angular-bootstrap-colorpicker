@@ -5,27 +5,41 @@ describe('colorpicker module', function () {
   beforeEach(module('colorpicker.module'));
 
   describe('directive', function () {
-    var element, scope;
+    var $scope, $compile;
 
-    beforeEach(inject(function($rootScope, $compile) {
-      scope = $rootScope;
-      element = $compile('<input colorpicker ng-model="picker.color" type="text" value="" />')(scope);
+    function compileElement(elementString, scope) {
+      var element = $compile(elementString)(scope);
       scope.$digest();
+      return element;
+    }
+
+    beforeEach(inject(function ($rootScope, _$compile_) {
+      $scope = $rootScope;
+      $compile = _$compile_;
     }));
 
+
     it('should clean up element from dom', function () {
+      var elm = compileElement('<input colorpicker ng-model="picker.color" type="text" value="" />', $scope);
       expect($(document).find('.colorpicker').length).toBe(1);
-      element.remove();
+      elm.remove();
       expect($(document).find('.colorpicker').length).toBe(0);
     });
 
     it('should change visibility of the picker element', function() {
-      element.click();
+      var elm = compileElement('<input colorpicker ng-model="picker.color" type="text" value="" />', $scope);
+      elm.click();
       expect($(document).find('.colorpicker').css('display')).toEqual('block');
     });
 
     it('should set a default class name', function() {
+      compileElement('<input colorpicker ng-model="picker.color" type="text" value="" />', $scope);
       expect($(document).find('.colorpicker').hasClass('colorpicker-position-bottom')).toBeTruthy();
+    });
+
+    it('should set a fixed position', function() {
+      compileElement('<input colorpicker colorpicker-fixed-position="true" ng-model="picker.color" type="text" value="" />', $scope);
+      expect($(document).find('.colorpicker').hasClass('colorpicker-fixed-position')).toBeTruthy();
     });
 
   });
