@@ -233,6 +233,7 @@ angular.module('colorpicker.module', [])
         var thisFormat = attrs.colorpicker ? attrs.colorpicker : 'hex';
         var position = attrs.colorpickerPosition ? attrs.colorpickerPosition : 'bottom';
         var fixedPosition = attrs.colorpickerFixedPosition ? attrs.colorpickerFixedPosition : false;
+        var target = fixedPosition && attrs.colorpickerParent ? elem.parent() : angular.element(document.body);
 
         $compile(colorpickerTemplate)($scope);
 
@@ -252,7 +253,7 @@ angular.module('colorpicker.module', [])
 
         colorpickerTemplate.addClass('colorpicker-position-' + position);
 
-        angular.element(document.body).append(colorpickerTemplate);
+        target.append(colorpickerTemplate);
 
         if(ngModel) {
           ngModel.$render = function () {
