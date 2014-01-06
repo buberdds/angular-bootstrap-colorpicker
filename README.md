@@ -43,12 +43,12 @@ As non input element
 <div colorpicker class="span2" ng-model="your_model"></div>
 ```
 
-Position of the colorpicker (top, right, bottom, left).
+Position of the color picker (top, right, bottom, left).
 ```html
 <input colorpicker colorpicker-position="right" class="span2" type="text" ng-model="your_model" />
 ```
 
-Put the colorpicker is used in a fixed element.
+The color picker in a fixed element
 ```html
 <input colorpicker colorpicker-fixed-position="true" class="span2" type="text" ng-model="your_model" />
 ```
