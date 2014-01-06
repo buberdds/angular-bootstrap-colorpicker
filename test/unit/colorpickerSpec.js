@@ -42,6 +42,16 @@ describe('colorpicker module', function () {
       expect($(document).find('.colorpicker').hasClass('colorpicker-fixed-position')).toBeTruthy();
     });
 
+    it('should use the body as target', function() {
+      var elm = compileElement('<input colorpicker ng-model="picker.color" type="text" value="" />', $scope);
+      expect($('body > .colorpicker').length > 0);
+    });
+
+    it('should use the parent element as target', function() {
+      var elm = compileElement('<input colorpicker colorpicker-fixed-position="true" colorpicker-parent="true" ng-model="picker.color" type="text" value="" />', $scope);
+      expect($(elm).parent().find('.colorpicker').length > 0);
+    });
+
   });
 
   describe('Color', function () {
