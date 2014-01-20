@@ -287,9 +287,9 @@ angular.module('colorpicker.module', [])
           colorpickerPreview = colorpickerTemplate.find('colorpicker-preview'),
           pickerColorPointers = colorpickerTemplate.find('i'),
           thisFormat = attrs.colorpicker ? attrs.colorpicker : 'hex',
-          position = attrs.colorpickerPosition ? attrs.colorpickerPosition : 'bottom',
-          fixedPosition = attrs.colorpickerFixedPosition ? attrs.colorpickerFixedPosition : false,
-          target = attrs.colorpickerParent ? elem.parent() : angular.element(document.body);
+          position = angular.isDefined(attrs.colorpickerPosition) ? attrs.colorpickerPosition : 'bottom',
+          fixedPosition = angular.isDefined(attrs.colorpickerFixedPosition) ? attrs.colorpickerFixedPosition : false,
+          target = angular.isDefined(attrs.colorpickerParent) ? elem.parent() : angular.element(document.body);
 
         $compile(colorpickerTemplate)($scope);
 
