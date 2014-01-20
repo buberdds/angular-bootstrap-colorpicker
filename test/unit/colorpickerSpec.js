@@ -57,11 +57,11 @@ describe('colorpicker module', function () {
   describe('Color', function () {
     var
       Color,
-      helper;
+        Helper;
 
-    beforeEach(inject(function (_Color_, _helper_) {
+    beforeEach(inject(function (_Color_, _Helper_) {
       Color = _Color_;
-      helper = _helper_;
+      Helper = _Helper_;
     }));
 
     it('should return color as a rgb string', function () {
@@ -110,4 +110,43 @@ describe('colorpicker module', function () {
     });
 
   });
+
+  describe('Slider', function () {
+    var
+        Color,
+        Slider;
+
+    beforeEach(inject(function (_Color_, _Slider_) {
+      Color = _Color_;
+      Slider = _Slider_;
+    }));
+
+    it('should return slider object', function () {
+      expect(Slider.getSlider()).toEqual({ maxLeft : 0, maxTop : 0, callLeft : null, callTop : null, knob : { top : 0, left : 0 } });
+    });
+
+    it('should set knob top and left properties in pixels', function () {
+      Slider.setKnob(111, 222);
+      expect(Slider.getSlider().knob).toEqual({ top : '111px', left : '222px'});
+    });
+
+    it('should set alpha slider properties', function () {
+      Slider.setSlider = jasmine.createSpy();
+      Slider.setAlpha('foo', 'bar');
+      expect(Slider.getSlider()).toEqual({ maxLeft : 0, maxTop : 100, callLeft : false, callTop : 'setAlpha' });
+    });
+
+    it('should set hue slider properties', function () {
+      Slider.setSlider = jasmine.createSpy();
+      Slider.setHue('foo', 'bar');
+      expect(Slider.getSlider()).toEqual({ maxLeft : 0, maxTop : 100, callLeft : false, callTop : 'setHue' });
+    });
+
+    it('should set saturation slider properties', function () {
+      Slider.setSlider = jasmine.createSpy();
+      Slider.setSaturation('foo', 'bar');
+      expect(Slider.getSlider()).toEqual({ maxLeft : 100, maxTop : 100, callLeft : 'setSaturation', callTop : 'setLightness' });
+    });
+  });
 });
+
