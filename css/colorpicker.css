@@ -151,10 +151,18 @@
 }
 .colorpicker-color {
   height: 10px;
+  margin-bottom: 3px;
   margin-top: 5px;
   clear: both;
   background-position: 0 100%;
 }
 .colorpicker-color div {
   height: 10px;
+}
+.colorpicker input {
+  width: 100px;
+  font-family: arial;
+  font-size: 11px;
+  color: #000;
+  background-color: #fff;
 }

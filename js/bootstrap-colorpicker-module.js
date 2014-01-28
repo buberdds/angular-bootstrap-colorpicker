@@ -211,13 +211,22 @@ angular.module('colorpicker.module', [])
       restrict: 'A',
       link: function ($scope, elem, attrs, ngModel) {
 
+        // config
+        var thisFormat = attrs.colorpicker ? attrs.colorpicker : 'hex';
+        var position = attrs.colorpickerPosition ? attrs.colorpickerPosition : 'bottom';
+        var fixedPosition = attrs.colorpickerFixedPosition ? attrs.colorpickerFixedPosition : false;
+        var target = fixedPosition && attrs.colorpickerParent ? elem.parent() : angular.element(document.body);
+        var withInput = attrs.colorpickerWithInput ? attrs.colorpickerWithInput : false;
+
         var
+          inputTemplate = withInput ? '<input type="text" name="colorpicker-input">' : '',
           template = '<div class="colorpicker dropdown">' +
             '<ul class="dropdown-menu">' +
             '<li class="colorpicker-saturation"><i></i></li>' +
             '<li class="colorpicker-hue"><i></i></li>' +
             '<li class="colorpicker-alpha"><i></i></li>' +
             '<li class="colorpicker-color"><div></div></li>' +
+            inputTemplate +
             '<button class="close close-colorpicker">&times;</button>' +
             '</ul>' +
             '</div>',
@@ -227,13 +236,10 @@ angular.module('colorpicker.module', [])
           pickerColorAlpha,
           pickerColorBase,
           pickerColorPointers,
+          pickerColorInput,
           pointer = null,
           slider = null;
 
-        var thisFormat = attrs.colorpicker ? attrs.colorpicker : 'hex';
-        var position = attrs.colorpickerPosition ? attrs.colorpickerPosition : 'bottom';
-        var fixedPosition = attrs.colorpickerFixedPosition ? attrs.colorpickerFixedPosition : false;
-        var target = fixedPosition && attrs.colorpickerParent ? elem.parent() : angular.element(document.body);
 
         $compile(colorpickerTemplate)($scope);
 
@@ -271,6 +277,7 @@ angular.module('colorpicker.module', [])
         pickerColorBase = colorpickerTemplate.find('li')[0].style;
         pickerColorPreview = colorpickerTemplate.find('div')[0].style;
         pickerColorPointers = colorpickerTemplate.find('i');
+        pickerColorInput = colorpickerTemplate.find('input');
 
         var previewColor = function () {
           try {
@@ -361,6 +368,7 @@ angular.module('colorpicker.module', [])
           previewColor();
           var newColor = pickerColor[thisFormat]();
           elem.val(newColor);
+          pickerColorInput.val(newColor);
           if(ngModel) {
             $scope.$apply(ngModel.$setViewValue(newColor));
           }
@@ -427,6 +435,24 @@ angular.module('colorpicker.module', [])
           event.preventDefault();
         });
 
+        pickerColorInput.bind('mousedown', function() {
+          event.stopPropagation();
+        });
+
+        elem.bind('keyup', function() {
+          pickerColorInput.val(elem.val());
+        });
+
+        pickerColorInput.bind('keyup', function(event) {
+          var newColor = this.value;
+          elem.val(newColor);
+          if(ngModel) {
+            $scope.$apply(ngModel.$setViewValue(newColor));
+          }
+          event.stopPropagation();
+          event.preventDefault();
+        });
+
         colorpickerTemplate.find('li').bind('click', function (event) {
           slidersUpdate(event);
           mousemove(event);
@@ -454,3 +480,4 @@ angular.module('colorpicker.module', [])
       }
     };
   }]);
+

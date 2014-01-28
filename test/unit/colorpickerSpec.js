@@ -52,6 +52,31 @@ describe('colorpicker module', function () {
       expect($(elm).parent().find('.colorpicker').length > 0);
     });
 
+    it('should update the color preview, when putting a new color in the optional input field', function() {
+      var elm = compileElement('<input colorpicker colorpicker-with-input="true" colorpicker-fixed-position="true" ng-model="picker.color" type="text" value="" />', $scope);
+      var $colorPicker = $('.colorpicker:last');
+      var $colorPickerInput = $colorPicker.find('input').val('#ff00ff');
+      var $colorPickerPreview = $colorPicker.find('.colorpicker-color div');
+      $colorPickerInput.trigger('keyup');
+      expect($colorPickerPreview.css('background-color')).toBe('rgb(255, 0, 255)');
+    });
+
+    it('should update the element, when putting a new color in the optional input field', function() {
+      var elm = compileElement('<input colorpicker colorpicker-with-input="true" colorpicker-fixed-position="true" ng-model="picker.color" type="text" value="" />', $scope);
+      var $colorPicker = $('.colorpicker:last');
+      var $colorPickerInput = $colorPicker.find('input').val('#ff00ff');
+      $colorPickerInput.trigger('keyup');
+      expect(elm.val()).toBe('#ff00ff');
+    });
+
+    it('should update the optional input field, when selecting a new color with the slider', function() {
+      var elm = compileElement('<input class="uschi" colorpicker colorpicker-with-input="true" colorpicker-fixed-position="true" ng-model="picker.color" type="text" value="sdf" />', $scope);
+      var $colorPicker = $('.colorpicker:last');
+      var $colorPickerInput = $colorPicker.find('input');
+      elm.val('#333');
+      elm.trigger('keyup');
+      expect($colorPickerInput.val()).toBe('#333');
+    });
   });
 
   describe('Color', function () {
