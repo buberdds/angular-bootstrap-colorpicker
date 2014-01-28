@@ -20,7 +20,7 @@ describe('colorpicker module', function () {
 
     afterEach(function() {
       element.remove();
-    })
+    });
 
 
     it('should clean up element from dom', function () {
@@ -54,7 +54,7 @@ describe('colorpicker module', function () {
     it('should use the parent element as target', function() {
       var template = $('<div id="foo"><input colorpicker colorpicker-fixed-position="true" colorpicker-parent="true" ng-model="picker.color" type="text" value="" /></div>');
       $('body').append(template);
-      var elm = compileElement(template.find('input'), $scope);
+      compileElement(template.find('input'), $scope);
       expect($('#foo').find('.colorpicker').length > 0).toBeTruthy();
       expect($('body > .colorpicker').length === 0).toBeTruthy();
     });
