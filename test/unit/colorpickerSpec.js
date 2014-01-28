@@ -5,10 +5,10 @@ describe('colorpicker module', function () {
   beforeEach(module('colorpicker.module'));
 
   describe('directive', function () {
-    var $scope, $compile;
+    var $scope, $compile, element;
 
     function compileElement(elementString, scope) {
-      var element = $compile(elementString)(scope);
+      element = $compile(elementString)(scope);
       scope.$digest();
       return element;
     }
@@ -17,6 +17,10 @@ describe('colorpicker module', function () {
       $scope = $rootScope;
       $compile = _$compile_;
     }));
+
+    afterEach(function() {
+      element.remove();
+    })
 
 
     it('should clean up element from dom', function () {
@@ -43,13 +47,16 @@ describe('colorpicker module', function () {
     });
 
     it('should use the body as target', function() {
-      var elm = compileElement('<input colorpicker ng-model="picker.color" type="text" value="" />', $scope);
-      expect($('body > .colorpicker').length > 0);
+      compileElement('<input colorpicker ng-model="picker.color" type="text" value="" />', $scope);
+      expect($('body > .colorpicker').length > 0).toBeTruthy();
     });
 
     it('should use the parent element as target', function() {
-      var elm = compileElement('<input colorpicker colorpicker-fixed-position="true" colorpicker-parent="true" ng-model="picker.color" type="text" value="" />', $scope);
-      expect($(elm).parent().find('.colorpicker').length > 0);
+      var template = $('<div id="foo"><input colorpicker colorpicker-fixed-position="true" colorpicker-parent="true" ng-model="picker.color" type="text" value="" /></div>');
+      $('body').append(template);
+      var elm = compileElement(template.find('input'), $scope);
+      expect($('#foo').find('.colorpicker').length > 0).toBeTruthy();
+      expect($('body > .colorpicker').length === 0).toBeTruthy();
     });
 
   });
