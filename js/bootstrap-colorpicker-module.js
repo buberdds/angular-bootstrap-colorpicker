@@ -131,13 +131,15 @@ angular.module('colorpicker.module', [])
       setColor: function (val) {
         val = val.toLowerCase();
         for (var key in Helper.stringParsers) {
-          var parser = Helper.stringParsers[key];
-          var match = parser.re.exec(val),
-            values = match && parser.parse(match),
-            space = parser.space || 'rgba';
-          if (values) {
-            this.value = this.RGBtoHSB.apply(null, values);
-            return false;
+          if (Helper.stringParsers.hasOwnProperty(key)) {
+            var parser = Helper.stringParsers[key];
+            var match = parser.re.exec(val),
+              values = match && parser.parse(match),
+              space = parser.space || 'rgba';
+            if (values) {
+              this.value = this.RGBtoHSB.apply(null, values);
+              return false;
+            }
           }
         }
       },
