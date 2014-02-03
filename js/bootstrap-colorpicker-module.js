@@ -13,15 +13,21 @@ angular.module('colorpicker.module', [])
       getOffset: function (elem) {
         var
           x = 0,
-          y = 0;
+          y = 0,
+          scrollX = 0,
+          scrollY = 0;
         while (elem && !isNaN(elem.offsetLeft) && !isNaN(elem.offsetTop)) {
           x += elem.offsetLeft;
           y += elem.offsetTop;
+          scrollX += elem.scrollLeft;
+          scrollY += elem.scrollTop;
           elem = elem.offsetParent;
         }
         return {
           top: y,
-          left: x
+          left: x,
+          scrollX: scrollX,
+          scrollY: scrollY
         };
       },
       // a set of RE's that can match strings and generate color tuples. https://github.com/jquery/jquery-color/
@@ -215,47 +221,46 @@ angular.module('colorpicker.module', [])
       getTopPosition: function(event) {
         return Math.max(0, Math.min(slider.maxTop, slider.top + ((event.pageY || pointer.top) - pointer.top)));
       },
-      setSlider: function (event, fixedPosition) {
-        var target = Helper.closestSlider(event.target);
-        slider.knob = target.children[0].style;
-        slider.left = event.pageX - Helper.getOffset(target).left;
-        slider.top = event.pageY - Helper.getOffset(target).top;
+      setSlider: function (event) {
+        var
+          target = Helper.closestSlider(event.target),
+          targetOffset = Helper.getOffset(target);
 
-        if (fixedPosition) {
-          slider.left -= window.pageXOffset;
-          slider.top -= window.pageYOffset;
-        }
+        slider.knob = target.children[0].style;
+        slider.left = event.pageX - targetOffset.left - window.pageXOffset + targetOffset.scrollX;
+        slider.top = event.pageY - targetOffset.top - window.pageYOffset + targetOffset.scrollY;
+
         pointer = {
           left: event.pageX,
           top: event.pageY
         };
       },
-      setSaturation: function(event, fixedPosition) {
+      setSaturation: function(event) {
         slider = {
           maxLeft: 100,
           maxTop: 100,
           callLeft: 'setSaturation',
           callTop: 'setLightness'
         };
-        this.setSlider(event, fixedPosition)
+        this.setSlider(event)
       },
-      setHue: function(event, fixedPosition) {
+      setHue: function(event) {
         slider = {
           maxLeft: 0,
           maxTop: 100,
           callLeft: false,
           callTop: 'setHue'
         };
-        this.setSlider(event, fixedPosition)
+        this.setSlider(event)
       },
-      setAlpha: function(event, fixedPosition) {
+      setAlpha: function(event) {
         slider = {
           maxLeft: 0,
           maxTop: 100,
           callLeft: false,
           callTop: 'setAlpha'
         };
-        this.setSlider(event, fixedPosition)
+        this.setSlider(event)
       },
       setKnob: function(top, left) {
         slider.knob.top = top + 'px';
@@ -303,32 +308,32 @@ angular.module('colorpicker.module', [])
           sliderAlpha = colorpickerTemplate.find('colorpicker-alpha');
           sliderAlpha
             .on('click', function(event) {
-              Slider.setAlpha(event, fixedPosition);
+              Slider.setAlpha(event);
               mousemove(event);
             })
             .on('mousedown', function(event) {
-              Slider.setAlpha(event, fixedPosition);
+              Slider.setAlpha(event);
               bindMouseEvents();
             });
         }
 
         sliderHue
           .on('click', function(event) {
-            Slider.setHue(event, fixedPosition);
+            Slider.setHue(event);
             mousemove(event);
           })
           .on('mousedown', function(event) {
-            Slider.setHue(event, fixedPosition);
+            Slider.setHue(event);
             bindMouseEvents();
           });
 
         sliderSaturation
           .on('click', function(event) {
-            Slider.setSaturation(event, fixedPosition);
+            Slider.setSaturation(event);
             mousemove(event);
           })
           .on('mousedown', function(event) {
-            Slider.setSaturation(event, fixedPosition);
+            Slider.setSaturation(event);
             bindMouseEvents();
           });
 
@@ -408,6 +413,11 @@ angular.module('colorpicker.module', [])
           var
             positionValue,
             positionOffset = Helper.getOffset(elem[0]);
+
+          if(angular.isDefined(attrs.colorpickerParent)) {
+            positionOffset.left = 0;
+            positionOffset.top = 0;
+          }
 
           if (position === 'top') {
             positionValue =  {
