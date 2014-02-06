@@ -72,6 +72,12 @@ colorpicker-alpha,
 .colorpicker colorpicker-saturation {
   position: relative;
 }
+.colorpicker input {
+  width: 100px;
+  font-size: 11px;
+  color: #000;
+  background-color: #fff;
+}
 .colorpicker.alpha {
   min-width: 140px;
 }
@@ -155,7 +161,7 @@ colorpicker-alpha,
 colorpicker-preview {
   display: block;
   height: 10px;
-  margin-top: 5px;
+  margin: 5px 0 3px 0;
   clear: both;
   background-position: 0 100%;
 }
