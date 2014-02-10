@@ -33,7 +33,12 @@ describe('colorpicker module', function () {
     it('should change visibility of the picker element', function() {
       var elm = compileElement('<input colorpicker ng-model="picker.color" type="text" value="" />', $scope);
       elm.click();
-      expect($(document).find('.colorpicker').css('display')).toEqual('block');
+      expect($(document).find('.colorpicker').hasClass('colorpicker-visible')).toBeTruthy();
+      $(document).find('.colorpicker').find('button').trigger('click');
+      expect($(document).find('.colorpicker').hasClass('colorpicker-visible')).toBeFalsy();
+      elm.click();
+      $(document).trigger('mousedown');
+      expect($(document).find('.colorpicker').hasClass('colorpicker-visible')).toBeFalsy();
     });
 
     it('should set a default class name', function() {
