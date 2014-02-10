@@ -111,22 +111,6 @@ angular.module('colorpicker.module', [])
           return {h: H || 1, s: S, b: V, a: a || 1};
         },
 
-        HueToRGB: function (p, q, h) {
-          if (h < 0)
-            h += 1;
-          else if (h > 1)
-            h -= 1;
-
-          if ((h * 6) < 1)
-            return p + (q - p) * h * 6;
-          else if ((h * 2) < 1)
-            return q;
-          else if ((h * 3) < 2)
-            return p + (q - p) * ((2 / 3) - h) * 6;
-          else
-            return p;
-        },
-
         //parse a string to HSB
         setColor: function (val) {
           val = val.toLowerCase();
