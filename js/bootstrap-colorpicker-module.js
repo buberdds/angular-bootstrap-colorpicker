@@ -222,8 +222,8 @@ angular.module('colorpicker.module', [])
         },
         setSaturation: function(event) {
           slider = {
-            maxLeft: 100,
-            maxTop: 100,
+            maxLeft: 200,
+            maxTop: 200,
             callLeft: 'setSaturation',
             callTop: 'setLightness'
           };
@@ -232,7 +232,7 @@ angular.module('colorpicker.module', [])
         setHue: function(event) {
           slider = {
             maxLeft: 0,
-            maxTop: 100,
+            maxTop: 200,
             callLeft: false,
             callTop: 'setHue'
           };
@@ -241,7 +241,7 @@ angular.module('colorpicker.module', [])
         setAlpha: function(event) {
           slider = {
             maxLeft: 0,
-            maxTop: 100,
+            maxTop: 200,
             callLeft: false,
             callTop: 'setAlpha'
           };
@@ -387,10 +387,10 @@ angular.module('colorpicker.module', [])
             Slider.setKnob(top, left);
 
             if (slider.callLeft) {
-              pickerColor[slider.callLeft].call(pickerColor, left / 100);
+              pickerColor[slider.callLeft].call(pickerColor, left / 200);
             }
             if (slider.callTop) {
-              pickerColor[slider.callTop].call(pickerColor, top / 100);
+              pickerColor[slider.callTop].call(pickerColor, top / 200);
             }
             previewColor();
             var newColor = pickerColor[thisFormat]();
@@ -412,11 +412,11 @@ angular.module('colorpicker.module', [])
           var update = function () {
             pickerColor.setColor(elem.val());
             pickerColorPointers.eq(0).css({
-              left: pickerColor.value.s * 100 + 'px',
-              top: 100 - pickerColor.value.b * 100 + 'px'
+              left: pickerColor.value.s * 200 + 'px',
+              top: 200 - pickerColor.value.b * 200 + 'px'
             });
-            pickerColorPointers.eq(1).css('top', 100 * (1 - pickerColor.value.h) + 'px');
-            pickerColorPointers.eq(2).css('top', 100 * (1 - pickerColor.value.a) + 'px');
+            pickerColorPointers.eq(1).css('top', 200 * (1 - pickerColor.value.h) + 'px');
+            pickerColorPointers.eq(2).css('top', 200 * (1 - pickerColor.value.a) + 'px');
             previewColor();
           };
 
