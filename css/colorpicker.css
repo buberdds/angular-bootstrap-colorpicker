@@ -63,7 +63,6 @@ colorpicker-alpha,
 .colorpicker {
   top: 0;
   left: 0;
-  position: absolute;
   z-index: 9999;
   display: none;
 }
@@ -83,6 +82,9 @@ colorpicker-alpha,
 }
 .colorpicker.alpha colorpicker-alpha {
   display: block;
+}
+.colorpicker.dropdown {
+  position: absolute;
 }
 .colorpicker.colorpicker-fixed-position {
   position: fixed;
