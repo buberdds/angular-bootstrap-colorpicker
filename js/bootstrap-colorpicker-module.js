@@ -457,11 +457,18 @@ angular.module('colorpicker.module', [])
             };
           };
 
+          var documentMousedownHandler = function() {
+            hideColorpickerTemplate();
+          };
+
           elem.on('click', function () {
             update();
             colorpickerTemplate
                 .addClass('colorpicker-visible')
                 .css(getColorpickerTemplatePosition());
+
+            // register global mousedown event to hide the colorpicker
+            $document.on('mousedown', documentMousedownHandler);
           });
 
           colorpickerTemplate.on('mousedown', function (event) {
@@ -472,14 +479,13 @@ angular.module('colorpicker.module', [])
           var hideColorpickerTemplate = function() {
             if (colorpickerTemplate.hasClass('colorpicker-visible')) {
               colorpickerTemplate.removeClass('colorpicker-visible');
+
+              // unregister the global mousedown event
+              $document.off('mousedown', documentMousedownHandler);
             }
           };
 
           colorpickerTemplate.find('button').on('click', function () {
-            hideColorpickerTemplate();
-          });
-
-          $document.on('mousedown', function () {
             hideColorpickerTemplate();
           });
         }
