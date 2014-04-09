@@ -10,7 +10,7 @@ angular.module('colorpicker.module', [])
           }
           return elem;
         },
-        getOffset: function (elem) {
+        getOffset: function (elem, fixedPosition) {
           var
               x = 0,
               y = 0,
@@ -19,8 +19,13 @@ angular.module('colorpicker.module', [])
           while (elem && !isNaN(elem.offsetLeft) && !isNaN(elem.offsetTop)) {
             x += elem.offsetLeft;
             y += elem.offsetTop;
-            scrollX += elem.scrollLeft;
-            scrollY += elem.scrollTop;
+            if (!fixedPosition && elem.tagName === 'BODY') {
+              scrollX += document.documentElement.scrollLeft || elem.scrollLeft;
+              scrollY += document.documentElement.scrollTop || elem.scrollTop;
+            } else {
+              scrollX += elem.scrollLeft;
+              scrollY += elem.scrollTop;
+            }
             elem = elem.offsetParent;
           }
           return {
@@ -207,10 +212,10 @@ angular.module('colorpicker.module', [])
         getTopPosition: function(event) {
           return Math.max(0, Math.min(slider.maxTop, slider.top + ((event.pageY || pointer.top) - pointer.top)));
         },
-        setSlider: function (event) {
+        setSlider: function (event, fixedPosition) {
           var
             target = Helper.closestSlider(event.target),
-            targetOffset = Helper.getOffset(target);
+            targetOffset = Helper.getOffset(target, fixedPosition);
           slider.knob = target.children[0].style;
           slider.left = event.pageX - targetOffset.left - window.pageXOffset + targetOffset.scrollX;
           slider.top = event.pageY - targetOffset.top - window.pageYOffset + targetOffset.scrollY;
@@ -220,32 +225,32 @@ angular.module('colorpicker.module', [])
             top: event.pageY
           };
         },
-        setSaturation: function(event) {
+        setSaturation: function(event, fixedPosition) {
           slider = {
             maxLeft: 100,
             maxTop: 100,
             callLeft: 'setSaturation',
             callTop: 'setLightness'
           };
-          this.setSlider(event)
+          this.setSlider(event, fixedPosition)
         },
-        setHue: function(event) {
+        setHue: function(event, fixedPosition) {
           slider = {
             maxLeft: 0,
             maxTop: 100,
             callLeft: false,
             callTop: 'setHue'
           };
-          this.setSlider(event)
+          this.setSlider(event, fixedPosition)
         },
-        setAlpha: function(event) {
+        setAlpha: function(event, fixedPosition) {
           slider = {
             maxLeft: 0,
             maxTop: 100,
             callLeft: false,
             callTop: 'setAlpha'
           };
-          this.setSlider(event)
+          this.setSlider(event, fixedPosition)
         },
         setKnob: function(top, left) {
           slider.knob.top = top + 'px';
@@ -316,32 +321,32 @@ angular.module('colorpicker.module', [])
             sliderAlpha = colorpickerTemplate.find('colorpicker-alpha');
             sliderAlpha
                 .on('click', function(event) {
-                  Slider.setAlpha(event);
+                  Slider.setAlpha(event, fixedPosition);
                   mousemove(event);
                 })
                 .on('mousedown', function(event) {
-                  Slider.setAlpha(event);
+                  Slider.setAlpha(event, fixedPosition);
                   bindMouseEvents();
                 });
           }
 
           sliderHue
               .on('click', function(event) {
-                Slider.setHue(event);
+                Slider.setHue(event, fixedPosition);
                 mousemove(event);
               })
               .on('mousedown', function(event) {
-                Slider.setHue(event);
+                Slider.setHue(event, fixedPosition);
                 bindMouseEvents();
               });
 
           sliderSaturation
               .on('click', function(event) {
-                Slider.setSaturation(event);
+                Slider.setSaturation(event, fixedPosition);
                 mousemove(event);
               })
               .on('mousedown', function(event) {
-                Slider.setSaturation(event);
+                Slider.setSaturation(event, fixedPosition);
                 bindMouseEvents();
               });
 
