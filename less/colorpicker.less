@@ -1,3 +1,5 @@
+@colorpicker-path: '..';
+
 .colorpicker-visible,
 .colorpicker-visible .dropdown-menu {
   display: block !important;
@@ -7,7 +9,7 @@ colorpicker-saturation {
   display: block;
   width: 100px;
   height: 100px;
-  background-image: data-uri('../img/saturation.png');
+  background-image: data-uri('@{colorpicker-path}/img/saturation.png');
   cursor: crosshair;
   float: left;
   i {
@@ -53,7 +55,7 @@ colorpicker-alpha {
 }
 
 colorpicker-hue {
-  background-image: data-uri('../img/hue.png');
+  background-image: data-uri('@{colorpicker-path}/img/hue.png');
 }
 
 colorpicker-alpha {
@@ -62,7 +64,7 @@ colorpicker-alpha {
 
 colorpicker-alpha,
 .colorpicker-color {
-  background-image: data-uri('../img/alpha.png');
+  background-image: data-uri('@{colorpicker-path}/img/alpha.png');
 }
 
 .colorpicker {
