@@ -232,7 +232,7 @@ angular.module('colorpicker.module', [])
             callLeft: 'setSaturation',
             callTop: 'setLightness'
           };
-          this.setSlider(event, fixedPosition)
+          this.setSlider(event, fixedPosition);
         },
         setHue: function(event, fixedPosition) {
           slider = {
@@ -241,7 +241,7 @@ angular.module('colorpicker.module', [])
             callLeft: false,
             callTop: 'setHue'
           };
-          this.setSlider(event, fixedPosition)
+          this.setSlider(event, fixedPosition);
         },
         setAlpha: function(event, fixedPosition) {
           slider = {
@@ -250,7 +250,7 @@ angular.module('colorpicker.module', [])
             callLeft: false,
             callTop: 'setAlpha'
           };
-          this.setSlider(event, fixedPosition)
+          this.setSlider(event, fixedPosition);
         },
         setKnob: function(top, left) {
           slider.knob.top = top + 'px';
