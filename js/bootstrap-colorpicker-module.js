@@ -129,8 +129,7 @@ angular.module('colorpicker.module', [])
             if (Helper.stringParsers.hasOwnProperty(key)) {
               var parser = Helper.stringParsers[key];
               var match = parser.re.exec(val),
-                  values = match && parser.parse(match),
-                  space = parser.space || 'rgba';
+                  values = match && parser.parse(match);
               if (values) {
                 this.value = this.RGBtoHSB.apply(null, values);
                 return false;
