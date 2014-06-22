@@ -113,8 +113,8 @@ angular.module('colorpicker.module', [])
           V = Math.max(r, g, b);
           C = V - Math.min(r, g, b);
           H = (C === 0 ? null :
-              V == r ? (g - b) / C :
-                  V == g ? (b - r) / C + 2 :
+              V === r ? (g - b) / C :
+                  V === g ? (b - r) / C + 2 :
                       (r - g) / C + 4
               );
           H = ((H + 360) % 6) * 60 / 360;
