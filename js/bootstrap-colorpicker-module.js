@@ -293,7 +293,7 @@ angular.module('colorpicker.module', [])
           if (withInput) {
             var pickerColorInput = colorpickerTemplate.find('input');
             pickerColorInput
-                .on('mousedown', function() {
+                .on('mousedown', function(event) {
                   event.stopPropagation();
                 })
                 .on('keyup', function(event) {
