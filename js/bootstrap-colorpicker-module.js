@@ -113,8 +113,8 @@ angular.module('colorpicker.module', [])
           V = Math.max(r, g, b);
           C = V - Math.min(r, g, b);
           H = (C === 0 ? null :
-              V == r ? (g - b) / C :
-                  V == g ? (b - r) / C + 2 :
+              V === r ? (g - b) / C :
+                  V === g ? (b - r) / C + 2 :
                       (r - g) / C + 4
               );
           H = ((H + 360) % 6) * 60 / 360;
@@ -129,8 +129,7 @@ angular.module('colorpicker.module', [])
             if (Helper.stringParsers.hasOwnProperty(key)) {
               var parser = Helper.stringParsers[key];
               var match = parser.re.exec(val),
-                  values = match && parser.parse(match),
-                  space = parser.space || 'rgba';
+                  values = match && parser.parse(match);
               if (values) {
                 this.value = this.RGBtoHSB.apply(null, values);
                 return false;
@@ -232,7 +231,7 @@ angular.module('colorpicker.module', [])
             callLeft: 'setSaturation',
             callTop: 'setLightness'
           };
-          this.setSlider(event, fixedPosition)
+          this.setSlider(event, fixedPosition);
         },
         setHue: function(event, fixedPosition) {
           slider = {
@@ -241,7 +240,7 @@ angular.module('colorpicker.module', [])
             callLeft: false,
             callTop: 'setHue'
           };
-          this.setSlider(event, fixedPosition)
+          this.setSlider(event, fixedPosition);
         },
         setAlpha: function(event, fixedPosition) {
           slider = {
@@ -250,7 +249,7 @@ angular.module('colorpicker.module', [])
             callLeft: false,
             callTop: 'setAlpha'
           };
-          this.setSlider(event, fixedPosition)
+          this.setSlider(event, fixedPosition);
         },
         setKnob: function(top, left) {
           slider.knob.top = top + 'px';
@@ -294,7 +293,7 @@ angular.module('colorpicker.module', [])
           if (withInput) {
             var pickerColorInput = colorpickerTemplate.find('input');
             pickerColorInput
-                .on('mousedown', function() {
+                .on('mousedown', function(event) {
                   event.stopPropagation();
                 })
                 .on('keyup', function(event) {
