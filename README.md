@@ -12,9 +12,10 @@ Previous releases:
 
 Installation
 ===============================
-Copy css/colorpicker.css and js/bootstrap-colorpicker-module.js.
+Copy `css/colorpicker.css` and `js/bootstrap-colorpicker-module.js`.
 Add a dependency to your app, for instance:
-angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'myApp.controllers', 'colorpicker.module'])
+
+    angular.module('myApp', ['colorpicker.module'])
 
 Examples:
 ===============================
