@@ -277,7 +277,7 @@ angular.module('colorpicker.module', [])
                       '<colorpicker-alpha><i></i></colorpicker-alpha>' +
                       '<colorpicker-preview></colorpicker-preview>' +
                       inputTemplate +
-                      '<button class="close close-colorpicker">&times;</button>' +
+                      '<button type="button" class="close close-colorpicker">&times;</button>' +
                       '</div>' +
                       '</div>',
               colorpickerTemplate = angular.element(template),
