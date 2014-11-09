@@ -114,46 +114,46 @@ colorpicker-alpha,
   padding: 4px;
   margin-top: 0;
 }
-.colorpicker-position-top .dropdown-menu::after {
+.colorpicker-position-top:not(.colorpicker-inline) .dropdown-menu::after {
   border-top: 6px solid #fff;
   border-bottom: 0;
   top: auto;
   bottom: -5px;
 }
-.colorpicker-position-top .dropdown-menu::before {
+.colorpicker-position-top:not(.colorpicker-inline) .dropdown-menu::before {
   border-top: 7px solid rgba(0, 0, 0, 0.2);
   border-bottom: 0;
   top: auto;
   bottom: -6px;
 }
-.colorpicker-position-right .dropdown-menu::after {
+.colorpicker-position-right:not(.colorpicker-inline) .dropdown-menu::after {
   border-right: 6px solid #fff;
   border-left: 0;
   top: 11px;
   left: -5px;
 }
-.colorpicker-position-right .dropdown-menu::before {
+.colorpicker-position-right:not(.colorpicker-inline) .dropdown-menu::before {
   border-right: 7px solid rgba(0, 0, 0, 0.2);
   border-left: 0;
   top: 10px;
   left: -6px;
 }
-.colorpicker-position-bottom .dropdown-menu::after {
+.colorpicker-position-bottom:not(.colorpicker-inline) .dropdown-menu::after {
   border-bottom: 6px solid #fff;
   border-top: 0;
 }
-.colorpicker-position-bottom .dropdown-menu::before {
+.colorpicker-position-bottom:not(.colorpicker-inline) .dropdown-menu::before {
   border-bottom: 7px solid rgba(0, 0, 0, 0.2);
   border-top: 0;
 }
-.colorpicker-position-left .dropdown-menu::after {
+.colorpicker-position-left:not(.colorpicker-inline) .dropdown-menu::after {
   border-left: 6px solid #fff;
   border-right: 0;
   top: 11px;
   left: auto;
   right: -5px;
 }
-.colorpicker-position-left .dropdown-menu::before {
+.colorpicker-position-left:not(.colorpicker-inline) .dropdown-menu::before {
   border-left: 7px solid rgba(0, 0, 0, 0.2);
   border-right: 0;
   top: 10px;
