@@ -265,7 +265,7 @@ angular.module('colorpicker.module', [])
           var
               thisFormat = attrs.colorpicker ? attrs.colorpicker : 'hex',
               position = angular.isDefined(attrs.colorpickerPosition) ? attrs.colorpickerPosition : 'bottom',
-	      inline = angular.isDefined(attrs.colorpickerInline) ? attrs.colorpickerInline : false,
+			        inline = angular.isDefined(attrs.colorpickerInline) ? attrs.colorpickerInline : false,
               fixedPosition = angular.isDefined(attrs.colorpickerFixedPosition) ? attrs.colorpickerFixedPosition : false,
               target = angular.isDefined(attrs.colorpickerParent) ? elem.parent() : angular.element(document.body),
               withInput = angular.isDefined(attrs.colorpickerWithInput) ? attrs.colorpickerWithInput : false,
@@ -356,9 +356,9 @@ angular.module('colorpicker.module', [])
           }
 
           colorpickerTemplate.addClass('colorpicker-position-' + position);
-		  if (inline === 'true') {
-			colorpickerTemplate.addClass('colorpicker-inline');
-		  }
+		      if (inline === 'true') {
+			      colorpickerTemplate.addClass('colorpicker-inline');
+		      }
 
           target.append(colorpickerTemplate);
 
@@ -470,7 +470,7 @@ angular.module('colorpicker.module', [])
             hideColorpickerTemplate();
           };
 
-		  if (inline === false) { 
+		  if(inline === false) { 
 			  elem.on('click', function () {
 				update();
 				colorpickerTemplate
@@ -481,8 +481,8 @@ angular.module('colorpicker.module', [])
 				$document.on('mousedown', documentMousedownHandler);
 			  });
 		  } else {
-			update();
-			colorpickerTemplate
+			  update();
+			  colorpickerTemplate
 					.addClass('colorpicker-visible')
 					.css(getColorpickerTemplatePosition());
 		  }
