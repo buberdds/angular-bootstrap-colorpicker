@@ -265,7 +265,7 @@ angular.module('colorpicker.module', [])
           var
               thisFormat = attrs.colorpicker ? attrs.colorpicker : 'hex',
               position = angular.isDefined(attrs.colorpickerPosition) ? attrs.colorpickerPosition : 'bottom',
-			  inline = angular.isDefined(attrs.colorpickerInline) ? attrs.colorpickerInline : false,
+			        inline = angular.isDefined(attrs.colorpickerInline) ? attrs.colorpickerInline : false,
               fixedPosition = angular.isDefined(attrs.colorpickerFixedPosition) ? attrs.colorpickerFixedPosition : false,
               target = angular.isDefined(attrs.colorpickerParent) ? elem.parent() : angular.element(document.body),
               withInput = angular.isDefined(attrs.colorpickerWithInput) ? attrs.colorpickerWithInput : false,
@@ -470,7 +470,7 @@ angular.module('colorpicker.module', [])
             hideColorpickerTemplate();
           };
 
-		  if (inline === false) {
+		  if (inline === false) { 
 			  elem.on('click', function () {
 				update();
 				colorpickerTemplate
