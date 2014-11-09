@@ -470,23 +470,22 @@ angular.module('colorpicker.module', [])
             hideColorpickerTemplate();
           };
 
-		  if(inline === false) { 
-			  elem.on('click', function () {
-				update();
-				colorpickerTemplate
-					.addClass('colorpicker-visible')
-					.css(getColorpickerTemplatePosition());
+    		  if(inline === false) { 
+    			  elem.on('click', function () {
+    				update();
+    				colorpickerTemplate
+    					.addClass('colorpicker-visible')
+    					.css(getColorpickerTemplatePosition());
 
-				// register global mousedown event to hide the colorpicker
-				$document.on('mousedown', documentMousedownHandler);
-			  });
-		  } else {
-			  update();
-			  colorpickerTemplate
-					.addClass('colorpicker-visible')
-					.css(getColorpickerTemplatePosition());
-		  }
-
+    				// register global mousedown event to hide the colorpicker
+    				$document.on('mousedown', documentMousedownHandler);
+    			  });
+    		  } else {
+    			  update();
+    			  colorpickerTemplate
+    					.addClass('colorpicker-visible')
+    					.css(getColorpickerTemplatePosition());
+    		  }
 
           colorpickerTemplate.on('mousedown', function (event) {
             event.stopPropagation();
