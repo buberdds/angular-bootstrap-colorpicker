@@ -265,10 +265,12 @@ angular.module('colorpicker.module', [])
           var
               thisFormat = attrs.colorpicker ? attrs.colorpicker : 'hex',
               position = angular.isDefined(attrs.colorpickerPosition) ? attrs.colorpickerPosition : 'bottom',
+              inline = angular.isDefined(attrs.colorpickerInline) ? attrs.colorpickerInline : false,
               fixedPosition = angular.isDefined(attrs.colorpickerFixedPosition) ? attrs.colorpickerFixedPosition : false,
               target = angular.isDefined(attrs.colorpickerParent) ? elem.parent() : angular.element(document.body),
               withInput = angular.isDefined(attrs.colorpickerWithInput) ? attrs.colorpickerWithInput : false,
               inputTemplate = withInput ? '<input type="text" name="colorpicker-input">' : '',
+              closeButton = !inline ? '<button type="button" class="close close-colorpicker">&times;</button>' : '',
               template =
                   '<div class="colorpicker dropdown">' +
                       '<div class="dropdown-menu">' +
@@ -277,7 +279,7 @@ angular.module('colorpicker.module', [])
                       '<colorpicker-alpha><i></i></colorpicker-alpha>' +
                       '<colorpicker-preview></colorpicker-preview>' +
                       inputTemplate +
-                      '<button type="button" class="close close-colorpicker">&times;</button>' +
+                      closeButton +
                       '</div>' +
                       '</div>',
               colorpickerTemplate = angular.element(template),
@@ -354,6 +356,9 @@ angular.module('colorpicker.module', [])
           }
 
           colorpickerTemplate.addClass('colorpicker-position-' + position);
+		      if (inline === 'true') {
+			      colorpickerTemplate.addClass('colorpicker-inline');
+		      }
 
           target.append(colorpickerTemplate);
 
@@ -465,15 +470,22 @@ angular.module('colorpicker.module', [])
             hideColorpickerTemplate();
           };
 
-          elem.on('click', function () {
-            update();
-            colorpickerTemplate
+          if(inline === false) { 
+            elem.on('click', function () {
+              update();
+              colorpickerTemplate
                 .addClass('colorpicker-visible')
                 .css(getColorpickerTemplatePosition());
 
-            // register global mousedown event to hide the colorpicker
-            $document.on('mousedown', documentMousedownHandler);
-          });
+              // register global mousedown event to hide the colorpicker
+              $document.on('mousedown', documentMousedownHandler);
+            });
+          } else {
+            update();
+            colorpickerTemplate
+              .addClass('colorpicker-visible')
+              .css(getColorpickerTemplatePosition());
+          }
 
           colorpickerTemplate.on('mousedown', function (event) {
             event.stopPropagation();
