@@ -470,21 +470,30 @@ angular.module('colorpicker.module', [])
             hideColorpickerTemplate();
           };
 
-          if(inline === false) { 
-            elem.on('click', function () {
+          var showColorpickerTemplate = function() {
+
+            if (!colorpickerTemplate.hasClass('colorpicker-visible')) {
               update();
               colorpickerTemplate
                 .addClass('colorpicker-visible')
                 .css(getColorpickerTemplatePosition());
 
-              // register global mousedown event to hide the colorpicker
-              $document.on('mousedown', documentMousedownHandler);
-            });
+              if (inline === false) {
+                // register global mousedown event to hide the colorpicker
+                $document.on('mousedown', documentMousedownHandler);
+              }
+
+              if (attrs.colorpickerIsOpen) {
+                $scope[attrs.colorpickerIsOpen] = true;
+              }
+            }
+
+          };
+
+          if(inline === false) { 
+            elem.on('click', showColorpickerTemplate);
           } else {
-            update();
-            colorpickerTemplate
-              .addClass('colorpicker-visible')
-              .css(getColorpickerTemplatePosition());
+            showColorpickerTemplate();
           }
 
           colorpickerTemplate.on('mousedown', function (event) {
@@ -507,12 +516,29 @@ angular.module('colorpicker.module', [])
               emitEvent('colorpicker-closed');
               // unregister the global mousedown event
               $document.off('mousedown', documentMousedownHandler);
+
+              if (attrs.colorpickerIsOpen) {
+                $scope[attrs.colorpickerIsOpen] = false;
+              }
             }
           };
 
           colorpickerTemplate.find('button').on('click', function () {
             hideColorpickerTemplate();
           });
+
+          if (attrs.colorpickerIsOpen) {
+            $scope.$watch(attrs.colorpickerIsOpen, function(shouldBeOpen) {
+
+              if (shouldBeOpen === true) {
+                showColorpickerTemplate();
+              } else if (shouldBeOpen === false) {
+                hideColorpickerTemplate();
+              }
+
+            });
+          }
+
         }
       };
     }]);
