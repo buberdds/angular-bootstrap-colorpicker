@@ -345,6 +345,9 @@ angular.module('colorpicker.module', [])
               .on('click', function(event) {
                 Slider.setSaturation(event, fixedPosition);
                 mousemove(event);
+                if (angular.isDefined(attrs.colorpickerCloseOnSelect)) {
+                  hideColorpickerTemplate();
+                }
               })
               .on('mousedown', function(event) {
                 Slider.setSaturation(event, fixedPosition);
@@ -485,6 +488,9 @@ angular.module('colorpicker.module', [])
 
               if (attrs.colorpickerIsOpen) {
                 $scope[attrs.colorpickerIsOpen] = true;
+                if (!$scope.$$phase) {
+                  $scope.$digest(); //trigger the watcher to fire
+                }
               }
             }
 
@@ -519,6 +525,9 @@ angular.module('colorpicker.module', [])
 
               if (attrs.colorpickerIsOpen) {
                 $scope[attrs.colorpickerIsOpen] = false;
+                if (!$scope.$$phase) {
+                  $scope.$digest(); //trigger the watcher to fire
+                }
               }
             }
           };
