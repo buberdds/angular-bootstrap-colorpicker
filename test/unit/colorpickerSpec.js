@@ -73,6 +73,13 @@ describe('colorpicker module', function () {
       expect($colorPickerPreview.css('background-color')).toBe('rgb(255, 0, 255)');
     });
 
+    // it('should display the initial color value if colorpicker-with-input="true"', function() {
+    //   $scope.picket.color = '#BADA55';
+    //   compileElement('<input colorpicker colorpicker-with-input="true" ng-model="picker.color" type="text" value="" />', $scope);
+    //   var $colorPickerInput = $colorPicker.find('input')
+    //   expect($colorPickerInput.val()).toBe('#BADA55');
+    // });
+
     it('should update the element, when putting a new color in the optional input field', function() {
       var elm = compileElement('<input colorpicker colorpicker-with-input="true" colorpicker-fixed-position="true" ng-model="picker.color" type="text" value="" />', $scope);
       var $colorPicker = $('.colorpicker:last');
