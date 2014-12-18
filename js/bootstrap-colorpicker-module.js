@@ -366,8 +366,12 @@ angular.module('colorpicker.module', [])
             ngModel.$render = function () {
               elem.val(ngModel.$viewValue);
             };
-            $scope.$watch(attrs.ngModel, function() {
+            $scope.$watch(attrs.ngModel, function(newVal) {
               update();
+
+              if (withInput) {
+                pickerColorInput.val(newVal);
+              }
             });
           }
 
@@ -470,7 +474,7 @@ angular.module('colorpicker.module', [])
             hideColorpickerTemplate();
           };
 
-          if(inline === false) { 
+          if(inline === false) {
             elem.on('click', function () {
               update();
               colorpickerTemplate
