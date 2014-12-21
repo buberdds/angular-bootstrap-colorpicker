@@ -1,0 +1,41 @@
+{
+  "name": "angular-bootstrap-colorpicker",
+  "version": "3.0.10",
+  "description": "Native AngularJS colorpicker directive",
+  "main": "js/bootstrap-colorpicker-module.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "jasmine-core": "^2.1.3",
+    "karma-coverage": "^0.2.7",
+    "karma-jasmine": "^0.3.2",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma": "^0.12.28"
+  },
+  "devDependencies": {
+    "jasmine-core": "^2.1.3",
+    "karma": "^0.12.28",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-cli": "0.0.4",
+    "karma-jasmine": "^0.3.2"
+  },
+  "scripts": {
+    "test": "karma start test/karma.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/buberdds/angular-bootstrap-colorpicker"
+  },
+  "keywords": [
+    "angular",
+    "color picker",
+    "bootstrap"
+  ],
+  "author": "Michal Zielenkiewicz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/buberdds/angular-bootstrap-colorpicker/issues"
+  },
+  "homepage": "https://github.com/buberdds/angular-bootstrap-colorpicker"
+}

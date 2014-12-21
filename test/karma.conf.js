@@ -8,7 +8,7 @@ module.exports = function(config){
       '../js/**/*.js',
       'unit/**/*.js'
     ],
-    autoWatch : true,
+    singleRun: true,
     frameworks: ['jasmine'],
     browsers : ['Chrome'],
     plugins : [
