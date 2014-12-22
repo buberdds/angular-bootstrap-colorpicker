@@ -1,5 +1,5 @@
-[![devDependency Status](https://david-dm.org/buberdds/angular-bootstrap-colorpicker#info=devDependencies)](https://david-dm.org/buberdds/angular-bootstrap-colorpicker#info=devDependencies)
-
+[![devDependency Status](https://david-dm.org/buberdds/angular-bootstrap-colorpicker?branch=master)](https://david-dm.org/buberdds/angular-bootstrap-colorpicker#info=devDependencies)
+[![devDependency Status](https://david-dm.org/karma-runner/gulp-karma/dev-status.png?branch=master)](https://david-dm.org/karma-runner/gulp-karma#info=devDependencies)
 angular-bootstrap-colorpicker
 =============================
 
