@@ -1,3 +1,5 @@
+[![devDependency Status](https://david-dm.org/buberdds/angular-bootstrap-colorpicker#info=devDependencies)](https://david-dm.org/buberdds/angular-bootstrap-colorpicker#info=devDependencies)
+
 angular-bootstrap-colorpicker
 =============================
 
