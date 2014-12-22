@@ -79,7 +79,7 @@ describe('colorpicker module', function () {
       };
       compileElement('<input colorpicker colorpicker-with-input="true" ng-model="picker.color" type="text" value="" />', $scope);
       var $colorPicker = $('.colorpicker:last');
-      var $colorPickerInput = $colorPicker.find('input')
+      var $colorPickerInput = $colorPicker.find('input');
       expect($colorPickerInput.val()).toBe('#BADA55');
     });
 
