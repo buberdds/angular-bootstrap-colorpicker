@@ -22,7 +22,7 @@ gulp.task('css', ['less'], function() {
 });
 
 gulp.task('jshint', function () {
-  return gulp.src(['js/*.js', 'test/unit/*.js'])
+  return gulp.src(['js/*.js', 'test/unit/*.js', '!js/bootstrap-colorpicker-module.min.js'])
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('default'));
 });
