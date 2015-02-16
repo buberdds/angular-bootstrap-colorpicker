@@ -70,3 +70,13 @@ The color picker in UI Bootstrap modal (the parent element position property mus
 ```html
 <input colorpicker colorpicker-parent="true" type="text" ng-model="your_model" />
 ```
+
+Binding the visibility of the color picker to a variable in the scope
+```html
+<input colorpicker colorpicker-is-open="isOpen" type="text" ng-model="your_model" />
+```
+
+Auto hiding the color picker when a color has been selected
+```html
+<input colorpicker colorpicker-close-on-select type="text" ng-model="your_model" />
+```
