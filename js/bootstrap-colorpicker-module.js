@@ -1,7 +1,6 @@
-'use strict';
-
 angular.module('colorpicker.module', [])
     .factory('Helper', function () {
+      'use strict';
       return {
         closestSlider: function (elem) {
           var matchesSelector = elem.matches || elem.webkitMatchesSelector || elem.mozMatchesSelector || elem.msMatchesSelector;
@@ -83,6 +82,7 @@ angular.module('colorpicker.module', [])
       };
     })
     .factory('Color', ['Helper', function (Helper) {
+      'use strict';
       return {
         value: {
           h: 1,
@@ -188,6 +188,7 @@ angular.module('colorpicker.module', [])
       };
     }])
     .factory('Slider', ['Helper', function (Helper) {
+      'use strict';
       var
           slider = {
             maxLeft: 0,
@@ -258,6 +259,7 @@ angular.module('colorpicker.module', [])
       };
     }])
     .directive('colorpicker', ['$document', '$compile', 'Color', 'Slider', 'Helper', function ($document, $compile, Color, Slider, Helper) {
+      'use strict';
       return {
         require: '?ngModel',
         restrict: 'A',
