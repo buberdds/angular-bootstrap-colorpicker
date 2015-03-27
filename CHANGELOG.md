@@ -1,3 +1,8 @@
+v3.0.13 - Fri, 27 Mar 2015 (ste2425)
+---------------------------------------
+
+- [738bff892714513551d1379254d8d71aa7197ae5] extended existing events for on select etc
+
 v3.0.12 - Mon, 16 Feb 2015 (mattlewis92)
 ---------------------------------------
 
