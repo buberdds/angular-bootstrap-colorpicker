@@ -330,6 +330,9 @@ angular.module('colorpicker.module', [])
                 .on('mousedown', function(event) {
                   Slider.setAlpha(event, fixedPosition);
                   bindMouseEvents();
+                })
+                .on('mouseup', function(event){
+                  emitEvent('colorpicker-selected-alpha');
                 });
           }
 
@@ -341,6 +344,9 @@ angular.module('colorpicker.module', [])
               .on('mousedown', function(event) {
                 Slider.setHue(event, fixedPosition);
                 bindMouseEvents();
+              })
+              .on('mouseup', function(event){
+                emitEvent('colorpicker-selected-hue');
               });
 
           sliderSaturation
@@ -354,6 +360,9 @@ angular.module('colorpicker.module', [])
               .on('mousedown', function(event) {
                 Slider.setSaturation(event, fixedPosition);
                 bindMouseEvents();
+              })
+              .on('mouseup', function(event){
+                emitEvent('colorpicker-selected-saturation');
               });
 
           if (fixedPosition) {
@@ -361,9 +370,9 @@ angular.module('colorpicker.module', [])
           }
 
           colorpickerTemplate.addClass('colorpicker-position-' + position);
-		      if (inline === 'true') {
-			      colorpickerTemplate.addClass('colorpicker-inline');
-		      }
+          if (inline === 'true') {
+            colorpickerTemplate.addClass('colorpicker-inline');
+          }
 
           target.append(colorpickerTemplate);
 
@@ -423,6 +432,7 @@ angular.module('colorpicker.module', [])
           };
 
           var mouseup = function () {
+            emitEvent('colorpicker-selected');
             $document.off('mousemove', mousemove);
             $document.off('mouseup', mouseup);
           };
@@ -486,6 +496,7 @@ angular.module('colorpicker.module', [])
               colorpickerTemplate
                 .addClass('colorpicker-visible')
                 .css(getColorpickerTemplatePosition());
+              emitEvent('colorpicker-shown');
 
               if (inline === false) {
                 // register global mousedown event to hide the colorpicker
