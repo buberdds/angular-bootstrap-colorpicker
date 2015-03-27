@@ -80,3 +80,33 @@ Auto hiding the color picker when a color has been selected
 ```html
 <input colorpicker colorpicker-close-on-select type="text" ng-model="your_model" />
 ```
+
+Events:
+===============================
+
+Each color picker will emit the following events passing a data object in the following format:
+```javascript
+{
+	name: '',
+	value: ''
+}
+```
+Name is the string representation of ng-model and value is the current color.
+
+#### colorpicker-selected
+A global selected event, will be fired when a color is selected from the saturation, hue or alpha slider.
+
+#### colorpicker-selected-saturation
+Will be fired when a color is selected from the saturation slider.
+
+#### colorpicker-selected-hue
+Will be fired when a color is selected from the hue slider.
+
+#### colorpicker-selected-alpha
+Will be fired when a color is selected from the alpha slider.
+
+#### colorpicker-shown
+Will be fired when a color picker is opened.
+
+#### colorpicker-closed
+Will be fired when a color picker is closed.
