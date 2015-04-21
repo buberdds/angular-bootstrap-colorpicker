@@ -221,8 +221,8 @@ angular.module('colorpicker.module', [])
           slider.top = event.pageY - targetOffset.top - window.pageYOffset + targetOffset.scrollY;
 
           pointer = {
-            left: event.pageX,
-            top: event.pageY
+            left: event.pageX - (event.offsetX - slider.left),
+            top: event.pageY - (event.offsetY - slider.top)
           };
         },
         setSaturation: function(event, fixedPosition) {
@@ -488,7 +488,7 @@ angular.module('colorpicker.module', [])
           var documentMousedownHandler = function() {
             hideColorpickerTemplate();
           };
-          
+
           var showColorpickerTemplate = function() {
 
             if (!colorpickerTemplate.hasClass('colorpicker-visible')) {
@@ -513,7 +513,7 @@ angular.module('colorpicker.module', [])
 
           };
 
-          if(inline === false) { 
+          if(inline === false) {
             elem.on('click', showColorpickerTemplate);
           } else {
             showColorpickerTemplate();
