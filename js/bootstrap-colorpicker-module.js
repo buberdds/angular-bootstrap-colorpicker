@@ -221,8 +221,8 @@ angular.module('colorpicker.module', [])
           slider.top = event.pageY - targetOffset.top - window.pageYOffset + targetOffset.scrollY;
 
           pointer = {
-            left: event.pageX - (event.offsetX - slider.left),
-            top: event.pageY - (event.offsetY - slider.top)
+            left: event.pageX,
+            top: event.pageY
           };
         },
         setSaturation: function(event, fixedPosition) {
