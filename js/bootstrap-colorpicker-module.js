@@ -215,14 +215,18 @@ angular.module('colorpicker.module', [])
         setSlider: function (event, fixedPosition) {
           var
             target = Helper.closestSlider(event.target),
-            targetOffset = Helper.getOffset(target, fixedPosition);
+            targetOffset = Helper.getOffset(target, fixedPosition),
+            rect = target.getBoundingClientRect(),
+            offsetX = event.clientX - rect.left,
+            offsetY = event.clientY - rect.top;
+
           slider.knob = target.children[0].style;
           slider.left = event.pageX - targetOffset.left - window.pageXOffset + targetOffset.scrollX;
           slider.top = event.pageY - targetOffset.top - window.pageYOffset + targetOffset.scrollY;
 
           pointer = {
-            left: event.pageX - ((event.offsetX ? event.offsetX : event.layerX) - slider.left),
-            top: event.pageY - ((event.offsetY ? event.offsetY : event.layerY) - slider.top)
+            left: event.pageX - (offsetX - slider.left),
+            top: event.pageY - (offsetY - slider.top)
           };
         },
         setSaturation: function(event, fixedPosition) {
