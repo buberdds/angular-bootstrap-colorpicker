@@ -14,7 +14,8 @@ angular.module('colorpicker.module', [])
               x = 0,
               y = 0,
               scrollX = 0,
-              scrollY = 0;
+              scrollY = 0,
+              rect = elem.getBoundingClientRect();
           while (elem && !isNaN(elem.offsetLeft) && !isNaN(elem.offsetTop)) {
             x += elem.offsetLeft;
             y += elem.offsetTop;
@@ -27,6 +28,8 @@ angular.module('colorpicker.module', [])
             }
             elem = elem.offsetParent;
           }
+          x = rect.left;
+          y = rect.top;
           return {
             top: y,
             left: x,
