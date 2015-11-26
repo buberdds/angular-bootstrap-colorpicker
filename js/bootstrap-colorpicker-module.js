@@ -11,14 +11,10 @@ angular.module('colorpicker.module', [])
         },
         getOffset: function (elem, fixedPosition) {
           var
-              x = 0,
-              y = 0,
-              scrollX = 0,
-              scrollY = 0,
-              rect = elem.getBoundingClientRect();
+            scrollX = 0,
+            scrollY = 0,
+            rect = elem.getBoundingClientRect();
           while (elem && !isNaN(elem.offsetLeft) && !isNaN(elem.offsetTop)) {
-            x += elem.offsetLeft;
-            y += elem.offsetTop;
             if (!fixedPosition && elem.tagName === 'BODY') {
               scrollX += document.documentElement.scrollLeft || elem.scrollLeft;
               scrollY += document.documentElement.scrollTop || elem.scrollTop;
@@ -28,11 +24,9 @@ angular.module('colorpicker.module', [])
             }
             elem = elem.offsetParent;
           }
-          x = rect.left;
-          y = rect.top;
           return {
-            top: y,
-            left: x,
+            top: rect.top + window.pageYOffset,
+            left: rect.left + window.pageXOffset,
             scrollX: scrollX,
             scrollY: scrollY
           };
