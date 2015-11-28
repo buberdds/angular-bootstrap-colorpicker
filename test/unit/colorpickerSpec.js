@@ -75,12 +75,13 @@ describe('colorpicker module', function () {
 
     it('should display the initial color value if colorpicker-with-input="true"', function() {
       $scope.picker = {
-        color: '#BADA55'
+        color: '#f0f0f0'
       };
-      compileElement('<input colorpicker colorpicker-with-input="true" ng-model="picker.color" type="text" value="" />', $scope);
+      var elem = compileElement('<input colorpicker colorpicker-with-input="true" ng-model="picker.color" type="text" />', $scope);
+      elem.click();
       var $colorPicker = $('.colorpicker:last');
       var $colorPickerInput = $colorPicker.find('input');
-      expect($colorPickerInput.val()).toBe('#BADA55');
+      expect($colorPickerInput.val()).toBe($scope.picker.color);
     });
 
     it('should update the element, when putting a new color in the optional input field', function() {

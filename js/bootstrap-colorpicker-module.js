@@ -301,18 +301,14 @@ angular.module('colorpicker.module', [])
                 .on('mousedown', function(event) {
                   event.stopPropagation();
                 })
-                .on('keyup', function(event) {
-                  var newColor = this.value;
-                  elem.val(newColor);
-                  if(ngModel) {
-                    $scope.$apply(ngModel.$setViewValue(newColor));
-                  }
-                  event.stopPropagation();
-                  event.preventDefault();
-                });
-            elem.on('keyup', function() {
-              pickerColorInput.val(elem.val());
-            });
+              .on('keyup', function() {
+                var newColor = this.value;
+                elem.val(newColor);
+                if (ngModel && ngModel.$modelValue !== newColor) {
+                  $scope.$apply(ngModel.$setViewValue(newColor));
+                  update(true);
+                }
+              });
           }
 
           var bindMouseEvents = function() {
@@ -381,14 +377,11 @@ angular.module('colorpicker.module', [])
             ngModel.$render = function () {
               elem.val(ngModel.$viewValue);
             };
-            $scope.$watch(attrs.ngModel, function(newVal) {
-              update();
-
-              if (withInput && pickerColorInput.val()!==newVal) {
-                pickerColorInput.val(newVal);
-              }
-            });
           }
+
+          elem.on('blur keyup change', function() {
+            update();
+          });
 
           elem.on('$destroy', function() {
             colorpickerTemplate.remove();
@@ -438,8 +431,11 @@ angular.module('colorpicker.module', [])
             $document.off('mouseup', mouseup);
           };
 
-          var update = function () {
+          var update = function (omitInnerInput) {
             pickerColor.setColor(elem.val());
+            if (withInput && !omitInnerInput) {
+              pickerColorInput.val(elem.val());
+            }
             pickerColorPointers.eq(0).css({
               left: pickerColor.value.s * 100 + 'px',
               top: 100 - pickerColor.value.b * 100 + 'px'
