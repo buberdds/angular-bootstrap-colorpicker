@@ -121,7 +121,7 @@ angular.module('colorpicker.module', [])
 
         //parse a string to HSB
         setColor: function (val) {
-          val = val.toLowerCase();
+          val = (val) ? val.toLowerCase() : val;
           for (var key in Helper.stringParsers) {
             if (Helper.stringParsers.hasOwnProperty(key)) {
               var parser = Helper.stringParsers[key];
