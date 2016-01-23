@@ -1,3 +1,8 @@
+v3.0.23 - 18 Dec 2015 2015 (JuanHB)
+---------------------------------------
+
+- [c9c745e8bb43f31d680f88590983c5089d057c0e] Solution for Exception when using non-input elements
+
 v3.0.14 - Mon, 21 Apr 2015 (jakubsikora)
 ---------------------------------------
 
