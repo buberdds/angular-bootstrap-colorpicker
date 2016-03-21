@@ -226,28 +226,28 @@ angular.module('colorpicker.module', [])
             top: event.pageY - (offsetY - slider.top)
           };
         },
-        setSaturation: function(event, fixedPosition) {
+        setSaturation: function(event, fixedPosition, componentSize) {
           slider = {
-            maxLeft: 100,
-            maxTop: 100,
+            maxLeft: componentSize,
+            maxTop: componentSize,
             callLeft: 'setSaturation',
             callTop: 'setLightness'
           };
           this.setSlider(event, fixedPosition);
         },
-        setHue: function(event, fixedPosition) {
+        setHue: function(event, fixedPosition, componentSize) {
           slider = {
             maxLeft: 0,
-            maxTop: 100,
+            maxTop: componentSize,
             callLeft: false,
             callTop: 'setHue'
           };
           this.setSlider(event, fixedPosition);
         },
-        setAlpha: function(event, fixedPosition) {
+        setAlpha: function(event, fixedPosition, componentSize) {
           slider = {
             maxLeft: 0,
-            maxTop: 100,
+            maxTop: componentSize,
             callLeft: false,
             callTop: 'setAlpha'
           };
@@ -272,6 +272,8 @@ angular.module('colorpicker.module', [])
               fixedPosition = angular.isDefined(attrs.colorpickerFixedPosition) ? attrs.colorpickerFixedPosition : false,
               target = angular.isDefined(attrs.colorpickerParent) ? elem.parent() : angular.element(document.body),
               withInput = angular.isDefined(attrs.colorpickerWithInput) ? attrs.colorpickerWithInput : false,
+              componentSize = angular.isDefined(attrs.colorpickerSize) ? attrs.colorpickerSize : 100,
+              componentSizePx = componentSize + 'px',
               inputTemplate = withInput ? '<input type="text" name="colorpicker-input" spellcheck="false">' : '',
               closeButton = !inline ? '<button type="button" class="close close-colorpicker">&times;</button>' : '',
               template =
@@ -287,6 +289,7 @@ angular.module('colorpicker.module', [])
                       '</div>',
               colorpickerTemplate = angular.element(template),
               pickerColor = Color,
+              componentSizePx,
               sliderAlpha,
               sliderHue = colorpickerTemplate.find('colorpicker-hue'),
               sliderSaturation = colorpickerTemplate.find('colorpicker-saturation'),
@@ -294,9 +297,16 @@ angular.module('colorpicker.module', [])
               pickerColorPointers = colorpickerTemplate.find('i');
 
           $compile(colorpickerTemplate)($scope);
+          colorpickerTemplate.css('min-width', parseInt(componentSize) + 29 + 'px');
+          sliderSaturation.css({
+            'width' : componentSizePx,
+            'height' : componentSizePx
+          });
+          sliderHue.css('height', componentSizePx);
 
           if (withInput) {
             var pickerColorInput = colorpickerTemplate.find('input');
+            pickerColorInput.css('width', componentSizePx);
             pickerColorInput
                 .on('mousedown', function(event) {
                   event.stopPropagation();
@@ -319,13 +329,14 @@ angular.module('colorpicker.module', [])
           if (thisFormat === 'rgba') {
             colorpickerTemplate.addClass('alpha');
             sliderAlpha = colorpickerTemplate.find('colorpicker-alpha');
+            sliderAlpha.css('height', componentSizePx);
             sliderAlpha
                 .on('click', function(event) {
-                  Slider.setAlpha(event, fixedPosition);
+                  Slider.setAlpha(event, fixedPosition, componentSize);
                   mousemove(event);
                 })
                 .on('mousedown', function(event) {
-                  Slider.setAlpha(event, fixedPosition);
+                  Slider.setAlpha(event, fixedPosition, componentSize);
                   bindMouseEvents();
                 })
                 .on('mouseup', function(event){
@@ -335,11 +346,11 @@ angular.module('colorpicker.module', [])
 
           sliderHue
               .on('click', function(event) {
-                Slider.setHue(event, fixedPosition);
+                Slider.setHue(event, fixedPosition, componentSize);
                 mousemove(event);
               })
               .on('mousedown', function(event) {
-                Slider.setHue(event, fixedPosition);
+                Slider.setHue(event, fixedPosition, componentSize);
                 bindMouseEvents();
               })
               .on('mouseup', function(event){
@@ -348,14 +359,14 @@ angular.module('colorpicker.module', [])
 
           sliderSaturation
               .on('click', function(event) {
-                Slider.setSaturation(event, fixedPosition);
+                Slider.setSaturation(event, fixedPosition, componentSize);
                 mousemove(event);
                 if (angular.isDefined(attrs.colorpickerCloseOnSelect)) {
                   hideColorpickerTemplate();
                 }
               })
               .on('mousedown', function(event) {
-                Slider.setSaturation(event, fixedPosition);
+                Slider.setSaturation(event, fixedPosition, componentSize);
                 bindMouseEvents();
               })
               .on('mouseup', function(event){
@@ -410,10 +421,10 @@ angular.module('colorpicker.module', [])
             Slider.setKnob(top, left);
 
             if (slider.callLeft) {
-              pickerColor[slider.callLeft].call(pickerColor, left / 100);
+              pickerColor[slider.callLeft].call(pickerColor, left / componentSize);
             }
             if (slider.callTop) {
-              pickerColor[slider.callTop].call(pickerColor, top / 100);
+              pickerColor[slider.callTop].call(pickerColor, top / componentSize);
             }
             previewColor();
             var newColor = pickerColor[thisFormat]();
@@ -439,11 +450,11 @@ angular.module('colorpicker.module', [])
               pickerColorInput.val(elem.val());
             }
             pickerColorPointers.eq(0).css({
-              left: pickerColor.value.s * 100 + 'px',
-              top: 100 - pickerColor.value.b * 100 + 'px'
+              left: pickerColor.value.s * componentSize + 'px',
+              top: componentSize - pickerColor.value.b * componentSize + 'px'
             });
-            pickerColorPointers.eq(1).css('top', 100 * (1 - pickerColor.value.h) + 'px');
-            pickerColorPointers.eq(2).css('top', 100 * (1 - pickerColor.value.a) + 'px');
+            pickerColorPointers.eq(1).css('top', componentSize * (1 - pickerColor.value.h) + 'px');
+            pickerColorPointers.eq(2).css('top', componentSize * (1 - pickerColor.value.a) + 'px');
             previewColor();
           }
 

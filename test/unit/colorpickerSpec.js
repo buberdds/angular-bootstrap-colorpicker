@@ -180,19 +180,19 @@ describe('colorpicker module', function () {
 
     it('should set alpha slider properties', function () {
       Slider.setSlider = jasmine.createSpy();
-      Slider.setAlpha('foo', 'bar');
+      Slider.setAlpha('foo', 'bar', 100);
       expect(Slider.getSlider()).toEqual({ maxLeft : 0, maxTop : 100, callLeft : false, callTop : 'setAlpha' });
     });
 
     it('should set hue slider properties', function () {
       Slider.setSlider = jasmine.createSpy();
-      Slider.setHue('foo', 'bar');
+      Slider.setHue('foo', 'bar', 100);
       expect(Slider.getSlider()).toEqual({ maxLeft : 0, maxTop : 100, callLeft : false, callTop : 'setHue' });
     });
 
     it('should set saturation slider properties', function () {
       Slider.setSlider = jasmine.createSpy();
-      Slider.setSaturation('foo', 'bar');
+      Slider.setSaturation('foo', 'bar', 100);
       expect(Slider.getSlider()).toEqual({ maxLeft : 100, maxTop : 100, callLeft : 'setSaturation', callTop : 'setLightness' });
     });
   });
