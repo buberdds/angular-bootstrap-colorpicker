@@ -88,6 +88,11 @@ Auto hiding the color picker when a color has been selected
 <input colorpicker colorpicker-close-on-select type="text" ng-model="your_model" />
 ```
 
+Customize a size of the color picker saturation panel
+```html
+<input colorpicker colorpicker-size="200" type="text" ng-model="your_model" />
+```
+
 Events:
 ===============================
 
