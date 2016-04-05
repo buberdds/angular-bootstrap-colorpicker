@@ -321,6 +321,13 @@ angular.module('colorpicker.module', [])
               });
           }
 
+          function documentKeyUpEnter(event) {
+            var keyCode = event.which || event.keyCode;
+            if (keyCode === 13) {
+              emitEvent('colorpicker-enter-pressed');
+            }
+          }
+
           function bindMouseEvents() {
             $document.on('mousemove', mousemove);
             $document.on('mouseup', mouseup);
@@ -500,7 +507,7 @@ angular.module('colorpicker.module', [])
           }
 
           function showColorpickerTemplate() {
-
+            $document.on('keyup', documentKeyUpEnter);
             if (!colorpickerTemplate.hasClass('colorpicker-visible')) {
               update();
               colorpickerTemplate
@@ -543,6 +550,7 @@ angular.module('colorpicker.module', [])
           }
 
           function hideColorpickerTemplate() {
+            $document.off('keyup', documentKeyUpEnter);
             if (colorpickerTemplate.hasClass('colorpicker-visible')) {
               colorpickerTemplate.removeClass('colorpicker-visible');
               emitEvent('colorpicker-closed');
