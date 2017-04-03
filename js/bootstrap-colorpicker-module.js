@@ -289,7 +289,12 @@ angular.module('colorpicker.module', [])
                       '</div>',
               colorpickerTemplate = angular.element(template),
               pickerColor = Color,
-              componentSizePx,
+              colorpickerValue = {
+                h: 1,
+                s: 1,
+                b: 1,
+                a: 1
+              },
               sliderAlpha,
               sliderHue = colorpickerTemplate.find('colorpicker-hue'),
               sliderSaturation = colorpickerTemplate.find('colorpicker-saturation'),
@@ -413,7 +418,7 @@ angular.module('colorpicker.module', [])
           }
 
           function mousemove(event) {
-            var 
+            var
                 left = Slider.getLeftPosition(event),
                 top = Slider.getTopPosition(event),
                 slider = Slider.getSlider();
@@ -445,6 +450,7 @@ angular.module('colorpicker.module', [])
           }
 
           function update(omitInnerInput) {
+            pickerColor.value = colorpickerValue;
             pickerColor.setColor(elem.val());
             if (withInput && !omitInnerInput) {
               pickerColorInput.val(elem.val());
@@ -455,6 +461,7 @@ angular.module('colorpicker.module', [])
             });
             pickerColorPointers.eq(1).css('top', componentSize * (1 - pickerColor.value.h) + 'px');
             pickerColorPointers.eq(2).css('top', componentSize * (1 - pickerColor.value.a) + 'px');
+            colorpickerValue = pickerColor.value;
             previewColor();
           }
 
