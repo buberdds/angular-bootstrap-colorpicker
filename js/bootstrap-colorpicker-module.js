@@ -291,7 +291,7 @@ angular.module('colorpicker.module', [])
               pickerColor = Color,
               colorpickerValue = {
                 h: 1,
-                s: 1,
+                s: 0,
                 b: 1,
                 a: 1
               },
